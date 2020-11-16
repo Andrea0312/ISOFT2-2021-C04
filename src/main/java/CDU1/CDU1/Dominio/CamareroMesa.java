@@ -1,4 +1,4 @@
-package CDU1.CDU1;
+package CDU1.CDU1.Dominio;
 
 public class CamareroMesa extends Camarero {
 	private Mesa mesa;

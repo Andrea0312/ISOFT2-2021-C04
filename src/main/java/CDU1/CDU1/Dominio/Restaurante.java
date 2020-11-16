@@ -1,4 +1,4 @@
-package CDU1.CDU1;
+package CDU1.CDU1.Dominio;
 
 public class Restaurante {
 	private int ID;
@@ -16,6 +16,12 @@ public class Restaurante {
 		Ciudad = ciudad;
 		this.empleados = empleados;
 		this.mesas = mesas;
+	}
+	
+	public Restaurante(int iD, String ciudad, String nombre) {
+		ID = iD;
+		Ciudad = ciudad;
+		Nombre = nombre;
 	}
 
 	public int getID() {
@@ -88,6 +94,10 @@ public class Restaurante {
 
 	public void setMesas(Mesa[] mesas) {
 		this.mesas = mesas;
+	}
+	
+	public String toString() {
+		return "ID: "+ID+", Ciudad: "+Ciudad+", Nombre: "+Nombre+".";
 	}
 
 	private Mesa[] mesas;

@@ -1,7 +1,9 @@
-package CDU1.CDU1;
+package CDU1.CDU1.Persistencia;
 import java.sql.*;
+import CDU1.CDU1.Dominio.*;
 
-public class Conexion {
+
+public class Agente {
 
     private static final String CONTROLADOR = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://148.3.109.70:3306/isolab?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -43,8 +45,8 @@ public class Conexion {
 				id = result.getInt("ID_Restaurante");
 				ciudad = result.getString("ciudad");
 				nombre = result.getString("nombre");
-	        	System.out.println("ID: "+id+", Ciudad: "+ciudad+", Nombre: "+nombre+".");
-
+				Restaurante restaurante= new Restaurante(id, nombre, ciudad);
+				System.out.println(restaurante);
 			}
 
 		} catch (SQLException e) {

@@ -1,13 +1,15 @@
-package CDU1.CDU1;
+package CDU1.CDU1.Interfaz;
 
 import java.sql.SQLException;
+
+import CDU1.CDU1.Persistencia.Agente;
 
 public class Principal {
 
 	public static void main(String[] args) {
-		Conexion.conectar();
+		Agente.conectar();
 		try {
-			Conexion.Select();
+			Agente.Select();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
