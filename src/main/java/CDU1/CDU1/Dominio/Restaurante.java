@@ -17,7 +17,7 @@ public class Restaurante {
 		this.empleados = empleados;
 		this.mesas = mesas;
 	}
-	
+
 	public Restaurante(int iD, String ciudad, String nombre) {
 		ID = iD;
 		Ciudad = ciudad;

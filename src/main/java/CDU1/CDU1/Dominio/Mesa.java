@@ -3,14 +3,14 @@ package CDU1.CDU1.Dominio;
 public class Mesa {
 
 	private int ID;
-	private int RestauranteID;
+	private Restaurante Restaurante;
 	private int n_Comensales;
 	private int estadoMesa;
 
-	public Mesa(int iD, int restauranteID, int n_Comensales, int estadoMesa) {
+	public Mesa(int iD, Restaurante restaurante, int n_Comensales, int estadoMesa) {
 
 		ID = iD;
-		RestauranteID = restauranteID;
+		Restaurante = restaurante;
 		this.n_Comensales = n_Comensales;
 		this.estadoMesa = estadoMesa;
 	}
@@ -23,12 +23,12 @@ public class Mesa {
 		ID = iD;
 	}
 
-	public int getRestauranteID() {
-		return RestauranteID;
+	public Restaurante getRestaurante() {
+		return Restaurante;
 	}
 
-	public void setRestauranteID(int restauranteID) {
-		RestauranteID = restauranteID;
+	public void setRestaurante(Restaurante restaurante) {
+		Restaurante = restaurante;
 	}
 
 	public int getN_Comensales() {

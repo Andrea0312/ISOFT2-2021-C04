@@ -2,14 +2,14 @@ package CDU1.CDU1.Dominio;
 
 public class Empleado {
 	private int ID;
-	private int RestauranteID;
+	private Restaurante Restaurante;
 	private String Nombre;
 	private String Apellido;
 	private String Telefono;
 	 
-	public Empleado(int iD, int restauranteID, String nombre, String apellido, String telefono) {
+	public Empleado(int iD, Restaurante rest, String nombre, String apellido, String telefono) {
 		ID = iD;
-		RestauranteID = restauranteID;
+		Restaurante = rest;
 		Nombre = nombre;
 		Apellido = apellido;
 		Telefono = telefono;
@@ -21,11 +21,11 @@ public class Empleado {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public int getRestauranteID() {
-		return RestauranteID;
+	public Restaurante getRestauranteID() {
+		return Restaurante;
 	}
-	public void setRestauranteID(int restauranteID) {
-		RestauranteID = restauranteID;
+	public void setRestauranteID(Restaurante restaurante) {
+		Restaurante = restaurante;
 	}
 	public String getNombre() {
 		return Nombre;
