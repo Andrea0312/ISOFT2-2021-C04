@@ -1,9 +1,8 @@
-package CDU1.CDU1.Interfaz;
+package CDU1.CDU1.Dominio;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import CDU1.CDU1.Dominio.Restaurante;
 import CDU1.CDU1.Persistencia.Agente;
 
 public class Principal {
