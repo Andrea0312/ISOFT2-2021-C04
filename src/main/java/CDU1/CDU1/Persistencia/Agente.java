@@ -39,4 +39,10 @@ public class Agente {
         ResultSet result = stmt.executeQuery(cadena);		
         return result;
     }
+    
+    public static ResultSet Update(String cadena) throws SQLException {
+        Statement stmt= Conectar();	
+        ResultSet result = stmt.executeQuery(cadena);		
+        return result;
+    }
 }

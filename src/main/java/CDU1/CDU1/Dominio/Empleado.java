@@ -46,6 +46,8 @@ public class Empleado {
 		Telefono = telefono;
 	}
 	
-	
-	
+	public String toString() {
+		return ID+" "+Restaurante.getNombre()+" "+Nombre+" "+Apellido+" "+Telefono;
+	}
+
 }

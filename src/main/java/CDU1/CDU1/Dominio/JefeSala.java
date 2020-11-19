@@ -11,6 +11,6 @@ public class JefeSala extends Empleado{
 		}
 		public void AsignarCamareroMesa(Mesa m, CamareroMesa c) {
 			//If mesa est� libre???
-			c.setMesa(m);
+			m.setCamareroMesa(c);
 		}
 } 

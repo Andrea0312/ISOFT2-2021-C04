@@ -4,13 +4,15 @@ public class Mesa {
 
 	private int ID;
 	private Restaurante Restaurante;
+	private CamareroMesa CamareroMesa;
 	private int n_Comensales;
 	private int estadoMesa;
 
-	public Mesa(int iD, Restaurante restaurante, int n_Comensales, int estadoMesa) {
+	public Mesa(int iD, Restaurante restaurante, CamareroMesa camareroMesa, int n_Comensales, int estadoMesa) {
 
 		ID = iD;
 		Restaurante = restaurante;
+		CamareroMesa = camareroMesa;
 		this.n_Comensales = n_Comensales;
 		this.estadoMesa = estadoMesa;
 	}
@@ -29,6 +31,14 @@ public class Mesa {
 
 	public void setRestaurante(Restaurante restaurante) {
 		Restaurante = restaurante;
+	}
+	
+	public CamareroMesa getCamareroMesa() {
+		return CamareroMesa;
+	}
+	
+	public void setCamareroMesa(CamareroMesa camareroMesa) {
+		CamareroMesa = camareroMesa;
 	}
 
 	public int getN_Comensales() {

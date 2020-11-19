@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import CDU1.CDU1.Dominio.CamareroMesa;
 import CDU1.CDU1.Dominio.Empleado;
 import CDU1.CDU1.Dominio.Mesa;
 import CDU1.CDU1.Dominio.Restaurante;
@@ -14,6 +15,8 @@ public class MesaDAO {
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
+		int idCamareroMesa = -1;
+		CamareroMesa CamareroMesa = null;
 		int tamano = -1;
 		int estado = -1;
 		Mesa mAux = null;
@@ -23,9 +26,11 @@ public class MesaDAO {
 				id = result.getInt("ID_Mesa");
 				idRestaurante = result.getInt("ID_Restaurante");
 				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
+				idCamareroMesa = result.getInt("ID_Empleado");
+				CamareroMesa = (CamareroMesa) EmpleadoDAO.SelectEmpleadoPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
 				estado = result.getInt("Estado");
-				mAux = new Mesa(id, restaurante, tamano, estado);
+				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
 				mesas.add(mAux);
 			}
 
@@ -48,6 +53,8 @@ public class MesaDAO {
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
+		int idCamareroMesa = -1;
+		CamareroMesa CamareroMesa = null;
 		int tamano = -1;
 		int estado = -1;
 		Mesa mAux = null;
@@ -57,9 +64,11 @@ public class MesaDAO {
 				id = result.getInt("ID_Mesa");
 				idRestaurante = result.getInt("ID_Restaurante");
 				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
+				idCamareroMesa = result.getInt("ID_Empleado");
+				CamareroMesa = (CamareroMesa) EmpleadoDAO.SelectEmpleadoPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
 				estado = result.getInt("Estado");
-				mAux = new Mesa(id, restaurante, tamano, estado);
+				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
 				
 			}
 
@@ -73,6 +82,8 @@ public class MesaDAO {
 		int id = ID;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
+		int idCamareroMesa = -1;
+		CamareroMesa CamareroMesa = null;
 		int tamano = -1;
 		int estado = -1;
 		Mesa mAux = null;
@@ -81,9 +92,11 @@ public class MesaDAO {
 			while (result.next()) {
 				idRestaurante = result.getInt("ID_Restaurante");
 				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
+				idCamareroMesa = result.getInt("ID_Empleado");
+				CamareroMesa = (CamareroMesa) EmpleadoDAO.SelectEmpleadoPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
 				estado = result.getInt("Estado");
-				mAux = new Mesa(id, restaurante, tamano, estado);
+				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
 				
 			}
 
@@ -91,6 +104,32 @@ public class MesaDAO {
 			e.printStackTrace();
 		}
 		return mAux;
+	}
+	
+	public static void UpdateMesaCamarero(ArrayList<Mesa> mesas) {
+		ResultSet result;
+
+		while(!mesas.isEmpty()) {
+			Mesa mesa = mesas.remove(0);
+			try {
+				result = Agente.Update("UPDATE isolab.mesa SET ID_Empleado= '"+mesa.getCamareroMesa().getID()+"' where ID_Mesa= '"+mesa+"'");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void UpdateMesaEstado(ArrayList<Mesa> mesas) {
+		ResultSet result;
+
+		while(!mesas.isEmpty()) {
+			Mesa mesa = mesas.remove(0);
+			try {
+				result = Agente.Update("UPDATE isolab.mesa SET Estado= '"+mesa.getEstadoMesa()+"' where ID_Mesa= '"+mesa+"'");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public static int ObtenerEstado(String cadenaEstado) {
@@ -117,4 +156,6 @@ public class MesaDAO {
 			return -1;
 		}
 	}
+	
+
 }

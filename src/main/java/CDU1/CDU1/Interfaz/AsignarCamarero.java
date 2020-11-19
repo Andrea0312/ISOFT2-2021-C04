@@ -122,11 +122,11 @@ public class AsignarCamarero {
 				try {
 					Mesa mesa = MesaDAO.SelectMesaPorID(idM);
 					Empleado empleadoAux = EmpleadoDAO.SelectEmpleadoPorID(idC);
-					CamareroMesa camareroMesa = new CamareroMesa(empleadoAux.getID(), empleadoAux.getRestaurante(), empleadoAux.getNombre(), empleadoAux.getApellido(), empleadoAux.getTelefono(), mesa);
+					CamareroMesa camareroMesa = new CamareroMesa(empleadoAux.getID(), empleadoAux.getRestaurante(), empleadoAux.getNombre(), empleadoAux.getApellido(), empleadoAux.getTelefono());
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				//FALTA ACTUALIZAR LA MESA EN LA BASE DE DATOS
+				MesaDAO.UpdateMesaCamarero(mesas);
 				labelEstado.setText("Asignado correctamente"); // if existian ambos IDs, si no habrá q mostrar error
 			}
 		});

@@ -24,7 +24,6 @@ public class EmpleadoDAO {
 		String apellido = "";
 		String telefono = "";
 		String tipo = "";
-		Mesa mesa = null;
 
 		try {
 			while (result.next()) {
@@ -37,8 +36,7 @@ public class EmpleadoDAO {
 				tipo = result.getString("Tipo");
 				switch (tipo) {
 				case "cm":
-					mesa = MesaDAO.SelectMesaPorIDEmpleado(id);
-					CamareroMesa cmAux = new CamareroMesa(id, restaurante, nombre, apellido, telefono, mesa);
+					CamareroMesa cmAux = new CamareroMesa(id, restaurante, nombre, apellido, telefono);
 					CamarerosMesa.add(cmAux);
 					break;
 				case "cb":
@@ -49,7 +47,9 @@ public class EmpleadoDAO {
 					JefeSala jsAux = new JefeSala(id, restaurante, nombre, apellido, telefono);
 					JefesSala.add(jsAux);
 					break;
-//COCINEROS???
+				default:
+					Empleado eAux = new Empleado(id, restaurante, nombre, apellido, telefono); //METER UN ARRAYLIST PARA CONTROLAR COCINEROS
+					break;
 				}
 			}
 
@@ -68,7 +68,6 @@ public class EmpleadoDAO {
 		String apellido = "";
 		String telefono = "";
 		String tipo = "";
-		Mesa mesa = null;
 
 		try {
 			if (result.next()) {
@@ -81,8 +80,7 @@ public class EmpleadoDAO {
 				tipo = result.getString("Tipo");
 				switch (tipo) {
 				case "cm":
-					mesa = MesaDAO.SelectMesaPorIDEmpleado(id);
-					CamareroMesa cmAux = new CamareroMesa(id, restaurante, nombre, apellido, telefono, mesa);
+					CamareroMesa cmAux = new CamareroMesa(id, restaurante, nombre, apellido, telefono);
 					return cmAux;
 				case "cb":
 					CamareroBarra cbAux = new CamareroBarra(id, restaurante, nombre, apellido, telefono);
@@ -90,7 +88,9 @@ public class EmpleadoDAO {
 				case "js":
 					JefeSala jsAux = new JefeSala(id, restaurante, nombre, apellido, telefono);
 					return jsAux;
-//COCINEROS???
+				default:
+					Empleado eAux = new Empleado(id, restaurante, nombre, apellido, telefono);
+					return eAux;
 				}
 			}
 
@@ -103,7 +103,7 @@ public class EmpleadoDAO {
 	public static String CadenaCamarerosMesa(ArrayList<CamareroMesa> camarerosMesa) {
 		String cadena="";
 		while(!camarerosMesa.isEmpty()) {
-			cadena+=camarerosMesa.remove(0);
+			cadena+=camarerosMesa.remove(0).toString()+"\n";
 		}
 		return cadena;
 	}

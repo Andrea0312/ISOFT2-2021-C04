@@ -19,7 +19,7 @@ public class RestauranteDAO {
 				id = result.getInt("ID_Restaurante");
 				ciudad = result.getString("ciudad");
 				nombre = result.getString("nombre");
-				Restaurante rAux= new Restaurante(id, nombre, ciudad);
+				Restaurante rAux= new Restaurante(id, ciudad, nombre);
 				restaurantes.add(rAux);
         	}
 
@@ -40,7 +40,7 @@ public class RestauranteDAO {
 				id = result.getInt("ID_Restaurante");
 				ciudad = result.getString("ciudad");
 				nombre = result.getString("nombre");
-				rAux= new Restaurante(id, nombre, ciudad);
+				rAux= new Restaurante(id, ciudad, nombre);
         	}
 
 		} catch (SQLException e) {
