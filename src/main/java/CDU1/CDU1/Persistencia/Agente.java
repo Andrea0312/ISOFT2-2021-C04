@@ -8,7 +8,7 @@ import CDU1.CDU1.Dominio.*;
 public class Agente {
 
     private static final String CONTROLADOR = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://148.3.109.70:3306/isolab?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://148.3.109.70/isolab?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String USUARIO = "pablovelasco";
     private static final String CLAVE = "ISO2c04//2020";
  

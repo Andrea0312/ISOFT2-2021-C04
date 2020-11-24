@@ -56,5 +56,9 @@ public class Mesa {
 	public void setEstadoMesa(int estadoMesa) {
 		this.estadoMesa = estadoMesa;
 	}
+	
+	public String toString() {
+		return "ID_Mesa: " + ID + ", Estado: " + estadoMesa + "\n";
+	}
 
 }

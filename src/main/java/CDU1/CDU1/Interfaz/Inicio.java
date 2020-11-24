@@ -56,7 +56,6 @@ public class Inicio {
 		btnAsignarCamareroA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AsignarCamarero asignarCam = new AsignarCamarero();
-				
 			}
 		});
 		btnAsignarCamareroA.setBounds(22, 85, 263, 54);

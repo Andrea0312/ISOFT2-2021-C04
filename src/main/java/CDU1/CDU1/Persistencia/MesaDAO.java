@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import CDU1.CDU1.Dominio.CamareroMesa;
-import CDU1.CDU1.Dominio.Empleado;
 import CDU1.CDU1.Dominio.Mesa;
 import CDU1.CDU1.Dominio.Restaurante;
 
@@ -19,6 +18,7 @@ public class MesaDAO {
 		CamareroMesa CamareroMesa = null;
 		int tamano = -1;
 		int estado = -1;
+		String estadoAux = "";
 		Mesa mAux = null;
 
 		try {
@@ -27,9 +27,42 @@ public class MesaDAO {
 				idRestaurante = result.getInt("ID_Restaurante");
 				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
 				idCamareroMesa = result.getInt("ID_Empleado");
-				CamareroMesa = (CamareroMesa) EmpleadoDAO.SelectEmpleadoPorID(idCamareroMesa);
+				CamareroMesa = CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
-				estado = result.getInt("Estado");
+				estadoAux = result.getString("Estado");
+
+				switch (estadoAux) {
+				case "L":
+					estado = 0;
+					break;
+				case "R":
+					estado = 1;
+					break;
+				case "O":
+					estado = 2;
+					break;
+				case "PI":
+					estado = 3;
+					break;
+				case "ECO":
+					estado = 4;
+					break;
+				case "S":
+					estado = 5;
+					break;
+				case "ECU":
+					estado = 6;
+					break;
+				case "PA":
+					estado = 7;
+					break;
+				case "EP":
+					estado = 8;
+					break;
+				default:
+					estado = -1;
+					break;
+				}
 				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
 				mesas.add(mAux);
 			}
@@ -39,15 +72,15 @@ public class MesaDAO {
 		}
 
 	}
-	
+
 	public static String CadenaMesas(ArrayList<Mesa> mesas) {
-		String cadena="";
-		while(!mesas.isEmpty()) {
-			cadena+=mesas.remove(0);
+		String cadena = "";
+		for(int i = 0; i<mesas.size(); i++){
+			cadena += mesas.get(i).toString();
 		}
 		return cadena;
 	}
-	
+
 	public static Mesa SelectMesaPorIDEmpleado(int ID_Empleado) throws SQLException {
 		ResultSet result = Agente.Select("SELECT * FROM isolab.mesa where ID_Restaurante = " + ID_Empleado);
 		int id = -1;
@@ -65,11 +98,11 @@ public class MesaDAO {
 				idRestaurante = result.getInt("ID_Restaurante");
 				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
 				idCamareroMesa = result.getInt("ID_Empleado");
-				CamareroMesa = (CamareroMesa) EmpleadoDAO.SelectEmpleadoPorID(idCamareroMesa);
+				CamareroMesa = (CamareroMesa) CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
 				estado = result.getInt("Estado");
 				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
-				
+
 			}
 
 		} catch (SQLException e) {
@@ -77,6 +110,7 @@ public class MesaDAO {
 		}
 		return mAux;
 	}
+
 	public static Mesa SelectMesaPorID(int ID) throws SQLException {
 		ResultSet result = Agente.Select("SELECT * FROM isolab.mesa where ID_Restaurante = " + ID);
 		int id = ID;
@@ -93,11 +127,11 @@ public class MesaDAO {
 				idRestaurante = result.getInt("ID_Restaurante");
 				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
 				idCamareroMesa = result.getInt("ID_Empleado");
-				CamareroMesa = (CamareroMesa) EmpleadoDAO.SelectEmpleadoPorID(idCamareroMesa);
+				CamareroMesa = (CamareroMesa) CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
 				estado = result.getInt("Estado");
 				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
-				
+
 			}
 
 		} catch (SQLException e) {
@@ -105,35 +139,34 @@ public class MesaDAO {
 		}
 		return mAux;
 	}
-	
+
 	public static void UpdateMesaCamarero(ArrayList<Mesa> mesas) {
-		ResultSet result;
-
-		while(!mesas.isEmpty()) {
+		while (!mesas.isEmpty()) {
 			Mesa mesa = mesas.remove(0);
 			try {
-				result = Agente.Update("UPDATE isolab.mesa SET ID_Empleado= '"+mesa.getCamareroMesa().getID()+"' where ID_Mesa= '"+mesa+"'");
+				ResultSet result = Agente.Update("UPDATE isolab.mesa SET ID_Empleado= '" + mesa.getCamareroMesa().getID()
+						+ "' where ID_Mesa= '" + mesa + "'");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	public static void UpdateMesaEstado(ArrayList<Mesa> mesas) {
-		ResultSet result;
-
-		while(!mesas.isEmpty()) {
+		while (!mesas.isEmpty()) {
 			Mesa mesa = mesas.remove(0);
+
 			try {
-				result = Agente.Update("UPDATE isolab.mesa SET Estado= '"+mesa.getEstadoMesa()+"' where ID_Mesa= '"+mesa+"'");
+				ResultSet result = Agente.Update(
+						"UPDATE isolab.mesa SET Estado= '" + mesa.getEstadoMesa() + "' where ID_Mesa= '" + mesa + "'");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	public static int ObtenerEstado(String cadenaEstado) {
-		switch(cadenaEstado) {
+		switch (cadenaEstado) {
 		case "Libre":
 			return 0;
 		case "Reservada":
@@ -156,6 +189,5 @@ public class MesaDAO {
 			return -1;
 		}
 	}
-	
 
 }

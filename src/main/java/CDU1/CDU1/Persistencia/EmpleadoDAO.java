@@ -1,17 +1,12 @@
 package CDU1.CDU1.Persistencia;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import CDU1.CDU1.Dominio.CamareroBarra;
 import CDU1.CDU1.Dominio.CamareroMesa;
 import CDU1.CDU1.Dominio.Empleado;
 import CDU1.CDU1.Dominio.JefeSala;
-import CDU1.CDU1.Dominio.Mesa;
 import CDU1.CDU1.Dominio.Restaurante;
 
 public class EmpleadoDAO {
@@ -35,20 +30,20 @@ public class EmpleadoDAO {
 				telefono = result.getString("telefono");
 				tipo = result.getString("Tipo");
 				switch (tipo) {
-				case "cm":
+				case "CM":
 					CamareroMesa cmAux = new CamareroMesa(id, restaurante, nombre, apellido, telefono);
 					CamarerosMesa.add(cmAux);
 					break;
-				case "cb":
+				case "CB":
 					CamareroBarra cbAux = new CamareroBarra(id, restaurante, nombre, apellido, telefono);
 					CamarerosBarra.add(cbAux);
 					break;
-				case "js":
+				case "JS":
 					JefeSala jsAux = new JefeSala(id, restaurante, nombre, apellido, telefono);
 					JefesSala.add(jsAux);
 					break;
 				default:
-					Empleado eAux = new Empleado(id, restaurante, nombre, apellido, telefono); //METER UN ARRAYLIST PARA CONTROLAR COCINEROS
+					Empleado eAux = new Empleado(id, restaurante, nombre, apellido, telefono); //METER UN ARRAYLIST PARA CONTROLAR COCINEROS O MÁS COSAS
 					break;
 				}
 			}

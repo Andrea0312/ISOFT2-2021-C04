@@ -1,10 +1,6 @@
 package CDU1.CDU1.Interfaz;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JRadioButton;
-import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -14,16 +10,13 @@ import CDU1.CDU1.Dominio.CamareroMesa;
 import CDU1.CDU1.Dominio.JefeSala;
 import CDU1.CDU1.Dominio.Mesa;
 import CDU1.CDU1.Dominio.Restaurante;
-import CDU1.CDU1.Persistencia.EmpleadoDAO;
+import CDU1.CDU1.Persistencia.CamareroBarraDAO;
+import CDU1.CDU1.Persistencia.CamareroMesaDAO;
+import CDU1.CDU1.Persistencia.JefeSalaDAO;
 import CDU1.CDU1.Persistencia.MesaDAO;
 import CDU1.CDU1.Persistencia.RestauranteDAO;
 
-import javax.swing.JInternalFrame;
-import java.awt.Checkbox;
-import javax.swing.Box;
-import java.awt.Panel;
-import java.awt.FlowLayout;
-import java.awt.Dimension;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
@@ -40,11 +33,10 @@ public class CambiarEstadoMesa {
 	private JFrame frame;
 	private JTextField textFieldIDMesa;
 	private JTextField MesaIDtextField;
-	private JTextField CamareroIDtextField;
 	private ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
 	private ArrayList<CamareroMesa> camarerosMesa = new ArrayList<CamareroMesa>();
 	private ArrayList<CamareroBarra> camarerosBarra = new ArrayList<CamareroBarra>();
-	private ArrayList<JefeSala> jefesMesa = new ArrayList<JefeSala>();
+	private ArrayList<JefeSala> jefesSala = new ArrayList<JefeSala>();
 	private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
 
 	/**
@@ -60,6 +52,9 @@ public class CambiarEstadoMesa {
 	 * Create the application.
 	 */
 	public CambiarEstadoMesa() {
+		GenerarRestaurantes();
+		GenerarMesas();
+		GenerarCamarerosMesa();
 		initialize();
 	}
 
@@ -67,6 +62,7 @@ public class CambiarEstadoMesa {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		frame = new JFrame();
 		frame.setVisible(true);
 
@@ -86,12 +82,13 @@ public class CambiarEstadoMesa {
 			public void actionPerformed(ActionEvent e) {
 				String idMesa = MesaIDtextField.getText();
 				int idM = Integer.parseInt(idMesa);
-				String estadoCadena = (String)comboBoxEstados.getSelectedItem().toString(); 	//COMPROBAR SI EL FINAL ESTÁ BIEN
+				String estadoCadena = (String) comboBoxEstados.getSelectedItem().toString(); // COMPROBAR SI EL FINAL
+																								// ESTÁ BIEN
 				int estado = MesaDAO.ObtenerEstado(estadoCadena);
 				try {
 					Mesa mesa = MesaDAO.SelectMesaPorID(idM);
 					mesa.setEstadoMesa(estado);
-					//ACTUALIZAR EN LA BBDD
+					// ACTUALIZAR EN LA BBDD
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -164,11 +161,37 @@ public class CambiarEstadoMesa {
 
 	}
 
-	public void GenerarListas() {
+	public void GenerarRestaurantes() {
 		try {
 			RestauranteDAO.SelectTodosRestaurantes(restaurantes);
-			EmpleadoDAO.SelectTodosEmpleados(camarerosBarra, camarerosMesa, jefesMesa);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void GenerarMesas() {
+		try {
 			MesaDAO.SelectTodasMesas(mesas);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void GenerarCamarerosBarra() {
+		try {
+			CamareroBarraDAO.SelectTodosCamarerosBarra(camarerosBarra);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void GenerarCamarerosMesa() {
+		try {
+			CamareroMesaDAO.SelectTodosCamarerosMesa(camarerosMesa);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void GenerarJefesSala() {
+		try {
+			JefeSalaDAO.SelectTodosJefesSala(jefesSala);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

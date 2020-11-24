@@ -1,12 +1,8 @@
 package CDU1.CDU1.Interfaz;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -17,12 +13,10 @@ import javax.swing.UIManager;
 
 import CDU1.CDU1.Dominio.CamareroBarra;
 import CDU1.CDU1.Dominio.CamareroMesa;
-import CDU1.CDU1.Dominio.Empleado;
-import CDU1.CDU1.Dominio.JefeSala;
 import CDU1.CDU1.Dominio.Mesa;
 import CDU1.CDU1.Dominio.Restaurante;
-import CDU1.CDU1.Persistencia.Agente;
-import CDU1.CDU1.Persistencia.EmpleadoDAO;
+import CDU1.CDU1.Persistencia.CamareroBarraDAO;
+import CDU1.CDU1.Persistencia.CamareroMesaDAO;
 import CDU1.CDU1.Persistencia.MesaDAO;
 import CDU1.CDU1.Persistencia.RestauranteDAO;
 
@@ -34,7 +28,6 @@ public class AsignarCamarero {
 	private ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
 	private ArrayList<CamareroMesa> camarerosMesa = new ArrayList<CamareroMesa>();
 	private ArrayList<CamareroBarra> camarerosBarra = new ArrayList<CamareroBarra>();
-	private ArrayList<JefeSala> jefesMesa = new ArrayList<JefeSala>();
 	private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
 
 	/**
@@ -51,8 +44,9 @@ public class AsignarCamarero {
 	 * Create the application.
 	 */
 	public AsignarCamarero() {
-		
-		GenerarListas();
+
+		GenerarCamarerosMesa();
+		GenerarMesas();
 		initialize();
 	}
 
@@ -93,7 +87,7 @@ public class AsignarCamarero {
 		JTextArea CamarerostextArea = new JTextArea();
 		CamarerostextArea.setEditable(false);
 		CamarerostextArea.setBounds(168, 73, 104, 161);
-		CamarerostextArea.setText(EmpleadoDAO.CadenaCamarerosMesa(camarerosMesa));
+		CamarerostextArea.setText(CamareroMesaDAO.CadenaCamarerosMesa(camarerosMesa));
 		frame.getContentPane().add(CamarerostextArea);
 
 		MesaIDtextField = new JTextField();
@@ -121,8 +115,8 @@ public class AsignarCamarero {
 				int idC = Integer.parseInt(idCamarero);
 				try {
 					Mesa mesa = MesaDAO.SelectMesaPorID(idM);
-					Empleado empleadoAux = EmpleadoDAO.SelectEmpleadoPorID(idC);
-					CamareroMesa camareroMesa = new CamareroMesa(empleadoAux.getID(), empleadoAux.getRestaurante(), empleadoAux.getNombre(), empleadoAux.getApellido(), empleadoAux.getTelefono());
+					CamareroMesa camareroMesa =  CamareroMesaDAO.SelectCamareroMesaPorID(idC);
+					mesa.setCamareroMesa(camareroMesa);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -134,12 +128,31 @@ public class AsignarCamarero {
 		frame.getContentPane().add(btnAsignar);
 
 	}
-	
-	public void GenerarListas() {
+
+	public void GenerarRestaurantes() {
 		try {
 			RestauranteDAO.SelectTodosRestaurantes(restaurantes);
-			EmpleadoDAO.SelectTodosEmpleados(camarerosBarra, camarerosMesa, jefesMesa);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void GenerarMesas() {
+		try {
 			MesaDAO.SelectTodasMesas(mesas);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void GenerarCamarerosBarra() {
+		try {
+			CamareroBarraDAO.SelectTodosCamarerosBarra(camarerosBarra);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void GenerarCamarerosMesa() {
+		try {
+			CamareroMesaDAO.SelectTodosCamarerosMesa(camarerosMesa);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
