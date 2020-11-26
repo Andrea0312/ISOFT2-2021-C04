@@ -69,10 +69,6 @@ public class CambiarEstadoMesa {
 		frame.setBounds(100, 100, 559, 410);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-		final JComboBox comboBoxEstados = new JComboBox();
-		comboBoxEstados.setModel(new DefaultComboBoxModel(new String[] { "Libre", "Reservada", "Ocupada", "Pidiendo",
-				"En espera de comida", "Servidos", "Esperando la cuenta", "Pagando", "En preparacion" }));
-
 		JLabel lblSeleccioneElEstado = new JLabel("Seleccione el estado:");
 
 		final JLabel labelEstado = new JLabel("");
@@ -82,13 +78,11 @@ public class CambiarEstadoMesa {
 			public void actionPerformed(ActionEvent e) {
 				String idMesa = MesaIDtextField.getText();
 				int idM = Integer.parseInt(idMesa);
-				String estadoCadena = (String) comboBoxEstados.getSelectedItem().toString(); // COMPROBAR SI EL FINAL
-																								// ESTÁ BIEN
-				int estado = MesaDAO.ObtenerEstado(estadoCadena);
+				
 				try {
 					Mesa mesa = MesaDAO.SelectMesaPorID(idM);
-					mesa.setEstadoMesa(estado);
-					// ACTUALIZAR EN LA BBDD
+					mesa.cambiarEstadoMesa();
+					MesaDAO.UpdateMesaEstado(mesa);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}

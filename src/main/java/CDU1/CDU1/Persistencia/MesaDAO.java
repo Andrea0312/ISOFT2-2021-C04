@@ -151,17 +151,13 @@ public class MesaDAO {
 			}
 		}
 	}
-
-	public static void UpdateMesaEstado(ArrayList<Mesa> mesas) {
-		while (!mesas.isEmpty()) {
-			Mesa mesa = mesas.remove(0);
-
-			try {
-				ResultSet result = Agente.Update(
-						"UPDATE isolab.mesa SET Estado= '" + mesa.getEstadoMesa() + "' where ID_Mesa= '" + mesa + "'");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+	
+	public static void UpdateMesaEstado(Mesa mesa) {
+		try {
+			ResultSet result = Agente.Update("UPDATE isolab.mesa SET Estado= '" + mesa.getEstadoMesa()
+					+ "' where ID_Mesa= '" + mesa + "'");
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

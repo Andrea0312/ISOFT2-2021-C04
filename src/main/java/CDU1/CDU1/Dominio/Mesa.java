@@ -53,12 +53,14 @@ public class Mesa {
 		return estadoMesa;
 	}
 
-	public void setEstadoMesa(int estadoMesa) {
-		this.estadoMesa = estadoMesa;
-	}
-	
+	public void cambiarEstadoMesa() {
+		if(estadoMesa == 8) {
+			estadoMesa = 0;
+		}else {
+			estadoMesa++;
+		}
+	}	
 	public String toString() {
 		return "ID_Mesa: " + ID + ", Estado: " + estadoMesa + "\n";
 	}
-
 }
