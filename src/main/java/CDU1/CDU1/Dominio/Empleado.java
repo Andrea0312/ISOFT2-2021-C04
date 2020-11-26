@@ -24,7 +24,7 @@ public class Empleado {
 	public Restaurante getRestaurante() {
 		return Restaurante;
 	}
-	public void setRestauranteID(Restaurante restaurante) {
+	public void setRestaurante(Restaurante restaurante) {
 		Restaurante = restaurante;
 	}
 	public String getNombre() {
