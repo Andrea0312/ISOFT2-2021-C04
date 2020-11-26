@@ -113,8 +113,6 @@ public class CambiarEstadoMesa {
 												.addGroup(groupLayout
 														.createParallelGroup(Alignment.LEADING)
 														.addComponent(lblSeleccioneElEstado)
-														.addComponent(comboBoxEstados, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 										.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addGap(18)
 												.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 														.addGroup(groupLayout
@@ -134,15 +132,13 @@ public class CambiarEstadoMesa {
 												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblIdMesa, GroupLayout.PREFERRED_SIZE, 122,
 												GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(208, Short.MAX_VALUE)));
+								.addContainerGap(208, Short.MAX_VALUE)))));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addGap(25)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblSeleccioneElEstado).addComponent(lblIdMesa))
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(comboBoxEstados, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
 								.addComponent(textFieldIDMesa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE))
 						.addGap(18).addComponent(lblListadoDeMesas).addGap(13)
