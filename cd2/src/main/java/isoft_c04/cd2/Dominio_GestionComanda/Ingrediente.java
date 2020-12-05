@@ -14,9 +14,13 @@ public class Ingrediente {
 	 * @param idRestaurante
 	 * @param nombre
 	 */
+	
 	public Ingrediente(int idIngrediente, int cantidad, int idRestaurante, String nombre) {
-		// TODO - implement Ingrediente.Ingrediente
-		throw new UnsupportedOperationException();
+		super();
+		IdIngrediente = idIngrediente;
+		this.cantidad = cantidad;
+		this.idRestaurante = idRestaurante;
+		this.nombre = nombre;
 	}
 
 	public Ingrediente(int idIngrediente, String nombre) {
@@ -77,9 +81,11 @@ public class Ingrediente {
 		this.nombre = nombre;
 	}
 
+	@Override
 	public String toString() {
-		// TODO - implement Ingrediente.toString
-		throw new UnsupportedOperationException();
+		return "Ingrediente [IdIngrediente=" + IdIngrediente + ", cantidad=" + cantidad + ", idRestaurante="
+				+ idRestaurante + ", nombre=" + nombre + "]";
 	}
+		
 
 }

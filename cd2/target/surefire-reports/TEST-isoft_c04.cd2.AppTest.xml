@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="isoft_c04.cd2.AppTest" time="0.04" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="isoft_c04.cd2.AppTest" time="0.048" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="15"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Alberto\OneDrive - Universidad de Castilla-La Mancha\EclipseWorkSpace_Desktop\cd2\target\test-classes;C:\Users\Alberto\OneDrive - Universidad de Castilla-La Mancha\EclipseWorkSpace_Desktop\cd2\target\classes;C:\Users\Alberto\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Alberto\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Alberto\.m2\repository\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar;C:\Users\Alberto\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar;"/>
+    <property name="java.class.path" value="C:\Users\Alberto\git\ISOFT2-2021-C04_R1\cd2\target\test-classes;C:\Users\Alberto\git\ISOFT2-2021-C04_R1\cd2\target\classes;C:\Users\Alberto\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Alberto\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Alberto\.m2\repository\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar;C:\Users\Alberto\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,9 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="C:\Users\Alberto\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_15.0.1.v20201027-0507\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\Alberto\AppData\Local\Temp\surefire17863494747333721467\surefirebooter12331816475249014319.jar C:\Users\Alberto\AppData\Local\Temp\surefire17863494747333721467 2020-12-05T14-23-59_763-jvmRun1 surefire17831383420720518568tmp surefire_07784187122342360533tmp"/>
+    <property name="sun.java.command" value="C:\Users\Alberto\AppData\Local\Temp\surefire431666610765259801\surefirebooter15087749790731452030.jar C:\Users\Alberto\AppData\Local\Temp\surefire431666610765259801 2020-12-05T19-22-36_169-jvmRun1 surefire3263097523445661664tmp surefire_04301363705910603574tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\Alberto\OneDrive - Universidad de Castilla-La Mancha\EclipseWorkSpace_Desktop\cd2\target\test-classes;C:\Users\Alberto\OneDrive - Universidad de Castilla-La Mancha\EclipseWorkSpace_Desktop\cd2\target\classes;C:\Users\Alberto\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Alberto\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Alberto\.m2\repository\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar;C:\Users\Alberto\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\Alberto\git\ISOFT2-2021-C04_R1\cd2\target\test-classes;C:\Users\Alberto\git\ISOFT2-2021-C04_R1\cd2\target\classes;C:\Users\Alberto\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Alberto\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Alberto\.m2\repository\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar;C:\Users\Alberto\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Alberto"/>
     <property name="user.language" value="es"/>
@@ -25,12 +25,12 @@
     <property name="java.version.date" value="2020-10-20"/>
     <property name="java.home" value="C:\Users\Alberto\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_15.0.1.v20201027-0507\jre"/>
     <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\Alberto\OneDrive - Universidad de Castilla-La Mancha\EclipseWorkSpace_Desktop\cd2"/>
+    <property name="basedir" value="C:\Users\Alberto\git\ISOFT2-2021-C04_R1\cd2"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Alberto\AppData\Local\Temp\surefire17863494747333721467\surefirebooter12331816475249014319.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Alberto\AppData\Local\Temp\surefire431666610765259801\surefirebooter15087749790731452030.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="15.0.1+9-18"/>
@@ -44,7 +44,7 @@
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\Alberto\AppData\Local\Temp\"/>
     <property name="java.version" value="15.0.1"/>
-    <property name="user.dir" value="C:\Users\Alberto\OneDrive - Universidad de Castilla-La Mancha\EclipseWorkSpace_Desktop\cd2"/>
+    <property name="user.dir" value="C:\Users\Alberto\git\ISOFT2-2021-C04_R1\cd2"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
@@ -55,5 +55,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="59.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="isoft_c04.cd2.AppTest" time="0.001"/>
+  <testcase name="shouldAnswerWithTrue" classname="isoft_c04.cd2.AppTest" time="0.002"/>
 </testsuite>

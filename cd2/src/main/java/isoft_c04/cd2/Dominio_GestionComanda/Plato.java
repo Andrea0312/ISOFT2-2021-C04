@@ -16,13 +16,18 @@ public class Plato {
 	 * @param ingredientes
 	 * @param nombre
 	 */
-	public Plato(int idPlato, double precio, ArrayList<Ingrediente> ingredientes, String nombre) {
-		// TODO - implement Plato.Plato
-		throw new UnsupportedOperationException();
-	}
+	
 
 	public int getIdPlato() {
 		return this.idPlato;
+	}
+
+	public Plato(int idPlato, double precio, ArrayList<Ingrediente> ingredientes, String nombre) {
+		super();
+		this.idPlato = idPlato;
+		this.precio = precio;
+		this.ingredientes = ingredientes;
+		this.nombre = nombre;
 	}
 
 	/**
@@ -69,9 +74,10 @@ public class Plato {
 		this.nombre = nombre;
 	}
 
+	@Override
 	public String toString() {
-		// TODO - implement Plato.toString
-		throw new UnsupportedOperationException();
+		return "Plato [idPlato=" + idPlato + ", precio=" + precio + ", ingredientes=" + ingredientes + ", nombre="
+				+ nombre + "]";
 	}
 
 }

@@ -9,45 +9,67 @@ import isoft_c04.cd2.Dominio_GestionComanda.*;
 
 public class PlatoDAO {
 
-	public ArrayList<Plato> obtenerPlatos() {
+	public static ArrayList<Plato[]> obtenerPlatos() {
 		// TODO - implement PlatoDAO.obtenerPlatos
 		
-		ArrayList<Plato> todosPlatos = new ArrayList<Plato>();
-		ArrayList<Ingrediente[]> todosIngredientes = new ArrayList<Ingrediente[]>();
-		
-		todosIngredientes = IngredienteDAO.obtenerIngredientes();
-		
-		/*
-		 * 
-		 * 		PROBAR LA CONSULTA !!
-		 * 
-		 * */
-		
-		//ResultSet result = Agente.consultaBD("SELECT ALL "
-		//		 						   + "FROM INGREDIENTE_ALMACEN;");
+		ArrayList<Plato[]> totalPlatos = new ArrayList<Plato[]>();
+		Plato platoAux = null;
+		ArrayList<Ingrediente> ingredientesPlato;
+		int numRestaurantes=0;
+		int numPlatos=0;
+		int idPlatoAux=0;
+		ResultSet queryAux;
 
-		/*
-		 * 
-		 * 		PROBAR LA CONSULTA !!
-		 * 
-		 * */
-		//ResultSet result = Agente.consultaBD("SELECT ALL FROM isolab.PLATOS;");
-		
 		try {
-			ResultSet result = Agente.consultaBD("SELECT ALL FROM isolab.PLATOS;");
-			while (result.next()) {
-				Plato pl = new Plato(result.getInt("idPlato")
-									,result.getDouble("precio")
-									,buscarIngredientes(todosIngredientes,result.getInt("idPlato"))
-									,result.getString("nombre"));
-				todosPlatos.add(pl);
+			
+			queryAux = Agente.consultaBD("select count(ID_Restaurante) "
+					  + "from restaurante;");
+			
+			if(queryAux.next()){
+				numRestaurantes = queryAux.getInt(1);
 			}
-
+			
+			queryAux = Agente.consultaBD("select count(ID_Plato) "
+  					+ "from plato;");
+			
+			if(queryAux.next()){
+				numPlatos = queryAux.getInt(1);
+			}
+			
+			for (int idRestaurante = 0; idRestaurante < numRestaurantes; idRestaurante++) {
+				
+				Plato[] platos = new Plato[numPlatos];
+								
+				for(int idPlato = 0; idPlato < numPlatos; idPlato++) {
+					
+					idPlatoAux= idPlato+1;
+					queryAux = Agente.consultaBD("select id_plato, precio, nombre "
+												 + "from plato "
+												 + "where id_plato = "+ (idPlatoAux) +" ;");
+					
+					ingredientesPlato = IngredienteDAO.obtenerIngredientes(idRestaurante, idPlato);
+					
+					if(queryAux.next()){
+						platoAux = new Plato(queryAux.getInt(1),queryAux.getDouble(2),ingredientesPlato,queryAux.getString(3));
+						
+					}
+					
+					platos[idPlato]= platoAux;
+					
+				}
+				
+				totalPlatos.add(platos);
+				
+			}
+			
+			return totalPlatos;
+			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return todosPlatos;
+		return null;
 		
 	}
 
@@ -81,7 +103,7 @@ public class PlatoDAO {
 	 * @param idRestaurante
 	 * @param idPlato
 	 */
-	public void eliminarUnPlatoRestaurante(int idRestaurante, int idPlato) {
+	public static void eliminarUnPlatoRestaurante(int idRestaurante, int idPlato) {
 		// TODO - implement PlatoDAO.eliminarUnPlatoRestaurante
 		Statement st = Agente.conectar();
 		/*
@@ -90,11 +112,11 @@ public class PlatoDAO {
 		 * 
 		 * */
 		try {
-			st.executeUpdate("UPDATE INGREDIENTE_ALMACEN"
+			st.executeUpdate("UPDATE INGREDIENTE_ALMACEN "
 						   + "SET  cantidad = cantidad-1 "
 						   + "WHERE ID_Restaurante="+idRestaurante
-						   + "AND ID_Ingrediente = (SELECT ID_Ingrediente"
-							 					+ "FROM PLATO_INGREDIENTE"
+						   + " AND ID_Ingrediente IN (SELECT ID_Ingrediente "
+							 					+ "FROM PLATO_INGREDIENTE "
 							 					+ "WHERE ID_Plato="+idPlato+");");			
 		} catch (SQLException e) {
 			e.printStackTrace();

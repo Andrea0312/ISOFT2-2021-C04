@@ -4,9 +4,9 @@ isoft_c04\cd2\Persistencia_GestionComanda\PlatoDAO.class
 isoft_c04\cd2\Persistencia_GestionComanda\RestauranteDAO.class
 isoft_c04\cd2\Presentacion_GestionComanda\AnotarComanda.class
 isoft_c04\cd2\Dominio_GestionComanda\Restaurante.class
-isoft_c04\cd2\Presentacion_GestionComanda\ImprimirCuenta.class
 isoft_c04\cd2\Dominio_GestionComanda\Empleado.class
 isoft_c04\cd2\Persistencia_GestionComanda\BebidaDAO.class
+isoft_c04\cd2\Presentacion_GestionComanda\imprimirCuenta.class
 isoft_c04\cd2\Dominio_GestionComanda\Plato.class
 isoft_c04\cd2\Dominio_GestionComanda\Ingrediente.class
 isoft_c04\cd2\Persistencia_GestionComanda\ComandaDAO.class

@@ -43,7 +43,7 @@ public class BebidaDAO {
 	 * @param idRestaurante
 	 * @param idBebida
 	 */
-	public void eliminarUnaBebida(int idRestaurante, int idBebida) {
+	public static void eliminarUnaBebida(int idRestaurante, int idBebida) {
 		// TODO - implement BebidaDAO.eliminarUnaBebida
 		
 		Statement st = Agente.conectar();
@@ -53,15 +53,14 @@ public class BebidaDAO {
 		 * 
 		 * */
 		try {
-			st.executeUpdate("UPDATE BEBIDA_ALMACEN"
+			st.executeUpdate("UPDATE BEBIDA_ALMACEN "
 						   + "SET  cantidad = cantidad-1 "
-						   + "WHERE idRestaurante="+idRestaurante
-						   + "AND idBebida="+idBebida+";");
+						   + "WHERE ID_Restaurante="+idRestaurante
+						   + " AND ID_Bebida="+idBebida+";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
 		
-		throw new UnsupportedOperationException();
 	}
 
 	/**
