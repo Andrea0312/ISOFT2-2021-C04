@@ -17,6 +17,7 @@ import org.dominio.CamareroMesa;
 import org.dominio.Restaurante;
 
 import org.persistencia_M1.MesaDAO;
+import org.persistencia_M1.RestauranteDAO;
 import org.persistencia_M1.CamareroBarraDAO;
 import org.persistencia_M1.CamareroMesaDAO;
 

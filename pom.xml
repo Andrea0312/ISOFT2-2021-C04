@@ -5,12 +5,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>CDU1</groupId>
-	<artifactId>CDU1</artifactId>
+	<groupId>isoft_c04</groupId>
+	<artifactId>ISO2_Proyecto</artifactId>
 	<version>0.1.1-SNAPSHOT</version>
  	<packaging>pom</packaging>
 
-	<name>CDU1</name>
+	<name>ISO2_Proyecto</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
 
@@ -84,6 +84,5 @@
 		<module>interfaz</module>
 		<module>dominio</module>
 		<module>persistencia_M1</module>
-		<module>persistencia_M2</module>
 	</modules>
 </project>

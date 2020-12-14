@@ -58,7 +58,7 @@ public class POVCamarero {
 		
 		JLabel iconAlarma = new JLabel("");
 		iconAlarma.setEnabled(false);
-		iconAlarma.setIcon(new ImageIcon(POVCamarero.class.getResource("/CDU1/CDU1/Interfaz/alarma.png")));
+		iconAlarma.setIcon(new ImageIcon(POVCamarero.class.getResource("/org/interfaz/alarma.png")));
 		iconAlarma.setBounds(433, 0, 133, 128);
 		frame.getContentPane().add(iconAlarma);
 		
