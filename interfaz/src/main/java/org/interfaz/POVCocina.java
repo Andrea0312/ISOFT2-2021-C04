@@ -47,7 +47,7 @@ public class POVCocina {
 		JButton btnAvisarCamarero = new JButton("Avisar camarero");
 		btnAvisarCamarero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//aqui poner iconAlarma a enabled en camarero
+				Inicio.camareroAvisado=true;
 				CamAvisado aviso = new CamAvisado();
 			}
 		});

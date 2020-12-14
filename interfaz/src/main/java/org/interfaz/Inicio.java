@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 public class Inicio {
 
 	private JFrame frame;
+	static boolean camareroAvisado = false;
 
 	/**
 	 * Launch the application.
@@ -66,7 +67,7 @@ public class Inicio {
 		JButton btnCamarero = new JButton("Camarero");
 		btnCamarero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				POVCamarero cam = new POVCamarero();
+				POVCamarero cam = new POVCamarero(camareroAvisado);
 			}
 		});
 		btnCamarero.setBounds(323, 97, 138, 65);

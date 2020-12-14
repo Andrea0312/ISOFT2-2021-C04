@@ -32,15 +32,15 @@ public class POVCamarero {
 	/**
 	 * Create the application.
 	 */
-	public POVCamarero() {
-		initialize();
+	public POVCamarero(boolean camareroAvisado) {
+		initialize(camareroAvisado);
 	}
 	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(boolean camareroAvisado) {
 		frame = new JFrame();
 		frame.setVisible(true);
 		frame.setBounds(100, 100, 596, 449);
@@ -57,11 +57,14 @@ public class POVCamarero {
 		frame.getContentPane().add(btnCambiarEstadoMesa);
 		
 		JLabel iconAlarma = new JLabel("");
+		
 		iconAlarma.setEnabled(false);
 		iconAlarma.setIcon(new ImageIcon(POVCamarero.class.getResource("/org/interfaz/alarma.png")));
 		iconAlarma.setBounds(433, 0, 133, 128);
 		frame.getContentPane().add(iconAlarma);
-		
+		if(camareroAvisado) {
+			iconAlarma.setEnabled(true);
+		}
 		JLabel lblAvisoDeCocina = new JLabel("Aviso de cocina");
 		lblAvisoDeCocina.setBounds(455, 133, 98, 16);
 		frame.getContentPane().add(lblAvisoDeCocina);
