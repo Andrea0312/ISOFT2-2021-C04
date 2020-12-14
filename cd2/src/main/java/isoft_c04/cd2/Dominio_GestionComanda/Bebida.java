@@ -16,9 +16,15 @@ public class Bebida {
 	 * @param idRestaurante
 	 * @param nombre
 	 */
+	
+
 	public Bebida(int idBebida, double precio, int cantidad, int idRestaurante, String nombre) {
-		// TODO - implement Bebida.Bebida
-		throw new UnsupportedOperationException();
+		super();
+		this.idBebida = idBebida;
+		this.precio = precio;
+		this.cantidad = cantidad;
+		this.idRestaurante = idRestaurante;
+		this.nombre = nombre;
 	}
 
 	public int getIdBebida() {

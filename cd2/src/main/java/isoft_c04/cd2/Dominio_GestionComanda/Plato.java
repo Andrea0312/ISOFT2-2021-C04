@@ -8,6 +8,7 @@ public class Plato {
 	private double precio;
 	private ArrayList<Ingrediente> ingredientes;
 	private String nombre;
+	private int tipo;
 
 	/**
 	 * 
@@ -18,16 +19,31 @@ public class Plato {
 	 */
 	
 
-	public int getIdPlato() {
-		return this.idPlato;
-	}
-
-	public Plato(int idPlato, double precio, ArrayList<Ingrediente> ingredientes, String nombre) {
+	public Plato(int idPlato, double precio, ArrayList<Ingrediente> ingredientes, String nombre, int tipo) {
 		super();
 		this.idPlato = idPlato;
 		this.precio = precio;
 		this.ingredientes = ingredientes;
 		this.nombre = nombre;
+		this.tipo = tipo;
+	}
+	
+	
+	
+	public int getTipo() {
+		return tipo;
+	}
+
+
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
+
+
+	public int getIdPlato() {
+		return this.idPlato;
 	}
 
 	/**

@@ -9,18 +9,22 @@ import isoft_c04.cd2.Dominio_GestionComanda.*;
 
 public class BebidaDAO {
 
-	public ArrayList<Bebida> obtenerBebida() {
+	public static ArrayList<Bebida> obtenerBebida(int idRestaurante) {
 		// TODO - implement BebidaDAO.obtenerBebida
 		
 		ArrayList<Bebida> bebidas = new ArrayList<Bebida>();
 		/*
 		 * FUNCIONA!!
 		 * */
-		ResultSet result = Agente.consultaBD("SELECT A.ID_Bebida, B.precio, A.cantidad, A.ID_Restaurante, B.nombre"
-						 				   + "FROM BEBIDA_ALMACEN A, BEBIDA B"
-						 				   + "WHERE A.ID_Bebida=B.ID_Bebida;");
+		
 		
 		try {
+			
+			ResultSet result = Agente.consultaBD("SELECT A.ID_Bebida, B.precio, A.cantidad, A.ID_Restaurante, B.nombre "
+	 				   + "FROM bebida_almacen A, bebida B "
+	 				   + "WHERE A.ID_Bebida=B.ID_Bebida "
+	 				   + "AND A.ID_Restaurante="+idRestaurante+";");
+			
 			while (result.next()) {
 				Bebida b = new Bebida(result.getInt("ID_Bebida")
 									 ,result.getDouble("precio")
