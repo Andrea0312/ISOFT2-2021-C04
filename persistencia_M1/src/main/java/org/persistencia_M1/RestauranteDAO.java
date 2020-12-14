@@ -9,18 +9,18 @@ import org.dominio.Restaurante;
 
 public class RestauranteDAO {
 	public static void SelectTodosRestaurantes(ArrayList<Restaurante> restaurantes) throws SQLException {
-        ResultSet result = Agente.Select("SELECT * FROM isolab.restaurante");
+        ResultSet result = Agente.Select("SELECT * FROM C04dbservice.restaurante");
         int id = -1;
         String ciudad = "";
-        String nombre = "";
+        String direccion = "";
         //PROBAR
 
         try {
         	while(result.next()) {
 				id = result.getInt("ID_Restaurante");
 				ciudad = result.getString("ciudad");
-				nombre = result.getString("nombre");
-				Restaurante rAux= new Restaurante(id, ciudad, nombre);
+				direccion = result.getString("direccion");
+				Restaurante rAux= new Restaurante(id, ciudad, direccion);
 				restaurantes.add(rAux);
         	}
 
@@ -30,18 +30,18 @@ public class RestauranteDAO {
         
     }
 	public static Restaurante SelectRestaurantePorID(int ID) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.restaurante where ID_Restaurante = "+ID);
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.restaurante where ID_Restaurante = "+ID);
         int id = -1;
         String ciudad = "";
-        String nombre = "";
+        String direccion = "";
         Restaurante rAux = null;
 
         try {
         	if(result.next()) {
 				id = result.getInt("ID_Restaurante");
 				ciudad = result.getString("ciudad");
-				nombre = result.getString("nombre");
-				rAux= new Restaurante(id, ciudad, nombre);
+				direccion = result.getString("direccion");
+				rAux= new Restaurante(id, ciudad, direccion);
         	}
 
 		} catch (SQLException e) {

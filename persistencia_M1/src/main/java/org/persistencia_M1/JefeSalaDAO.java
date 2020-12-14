@@ -16,7 +16,7 @@ public class JefeSalaDAO {
 		return cadena;
 	}
 	public static JefeSala SelectJefeSalaPorID(int ID) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.empleado where ID_Empleado = " + ID + " and Tipo = 'JS'");
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.empleado where ID_Empleado = " + ID + " and Tipo = 'JS'");
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
@@ -42,7 +42,7 @@ public class JefeSalaDAO {
 		return null;
 	}
 	public static void SelectTodosJefesSala(ArrayList<JefeSala> JefesSala) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.empleado where Tipo = 'CM'");
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.empleado where Tipo = 'CM'");
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;

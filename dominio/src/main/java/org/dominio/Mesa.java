@@ -52,6 +52,10 @@ public class Mesa {
 	public int getEstadoMesa() {
 		return estadoMesa;
 	}
+	
+	public void setEstadoMesa(int newEstadoMesa) {
+		estadoMesa = newEstadoMesa;
+	}
 
 	public void cambiarEstadoMesa() {
 		if(estadoMesa == 8) {

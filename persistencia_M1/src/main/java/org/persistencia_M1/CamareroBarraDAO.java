@@ -17,7 +17,7 @@ public class CamareroBarraDAO {
 	}
 
 	public static CamareroBarra SelectCamareroBarraPorID(int ID) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.empleado where ID_Empleado = " + ID + " and Tipo = 'CB'");
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.empleado where ID_Empleado = " + ID + " and Tipo = 'CB'");
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
@@ -44,7 +44,7 @@ public class CamareroBarraDAO {
 	}
 	
 	public static void SelectTodosCamarerosBarra(ArrayList<CamareroBarra> CamarerosBarra) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.empleado where Tipo = 'CB'");
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.empleado where Tipo = 'CB'");
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;

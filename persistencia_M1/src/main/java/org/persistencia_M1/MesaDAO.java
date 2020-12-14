@@ -1,5 +1,6 @@
 package org.persistencia_M1;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import org.dominio.Restaurante;
 
 public class MesaDAO {
 	public static void SelectTodasMesas(ArrayList<Mesa> mesas) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.mesa");
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.mesa");
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
@@ -18,7 +19,6 @@ public class MesaDAO {
 		CamareroMesa CamareroMesa = null;
 		int tamano = -1;
 		int estado = -1;
-		String estadoAux = "";
 		Mesa mAux = null;
 
 		try {
@@ -29,40 +29,7 @@ public class MesaDAO {
 				idCamareroMesa = result.getInt("ID_Empleado");
 				CamareroMesa = CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
-				estadoAux = result.getString("Estado");
-
-				switch (estadoAux) {
-				case "L":
-					estado = 0;
-					break;
-				case "R":
-					estado = 1;
-					break;
-				case "O":
-					estado = 2;
-					break;
-				case "PI":
-					estado = 3;
-					break;
-				case "ECO":
-					estado = 4;
-					break;
-				case "S":
-					estado = 5;
-					break;
-				case "ECU":
-					estado = 6;
-					break;
-				case "PA":
-					estado = 7;
-					break;
-				case "EP":
-					estado = 8;
-					break;
-				default:
-					estado = -1;
-					break;
-				}
+				estado = result.getInt("ID_EstadoMesa");
 				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
 				mesas.add(mAux);
 			}
@@ -82,7 +49,7 @@ public class MesaDAO {
 	}
 
 	public static Mesa SelectMesaPorIDEmpleado(int ID_Empleado) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.mesa where ID_Restaurante = " + ID_Empleado);
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.mesa where ID_Empleado = " + ID_Empleado);
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
@@ -100,7 +67,7 @@ public class MesaDAO {
 				idCamareroMesa = result.getInt("ID_Empleado");
 				CamareroMesa = (CamareroMesa) CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
-				estado = result.getInt("Estado");
+				estado = result.getInt("ID_EstadoMesa");
 				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
 
 			}
@@ -112,7 +79,7 @@ public class MesaDAO {
 	}
 
 	public static Mesa SelectMesaPorID(int ID) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.mesa where ID_Restaurante = " + ID);
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.mesa where ID_Mesa = " + ID);
 		int id = ID;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
@@ -129,9 +96,9 @@ public class MesaDAO {
 				idCamareroMesa = result.getInt("ID_Empleado");
 				CamareroMesa = (CamareroMesa) CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
-				estado = result.getInt("Estado");
+				estado = result.getInt("ID_EstadoMesa");
 				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
-
+				System.out.println(mAux);
 			}
 
 		} catch (SQLException e) {
@@ -144,8 +111,8 @@ public class MesaDAO {
 		while (!mesas.isEmpty()) {
 			Mesa mesa = mesas.remove(0);
 			try {
-				ResultSet result = Agente.Update("UPDATE isolab.mesa SET ID_Empleado= '" + mesa.getCamareroMesa().getID()
-						+ "' where ID_Mesa= '" + mesa + "'");
+				PreparedStatement result = Agente.Update("UPDATE C04dbservice.mesa SET ID_Empleado= '" + mesa.getCamareroMesa().getID()
+						+ "' where ID_Mesa= '" + mesa.getID() + "'");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -154,8 +121,8 @@ public class MesaDAO {
 	
 	public static void UpdateMesaEstado(Mesa mesa) {
 		try {
-			ResultSet result = Agente.Update("UPDATE isolab.mesa SET Estado= '" + mesa.getEstadoMesa()
-					+ "' where ID_Mesa= '" + mesa + "'");
+			Agente.Update("UPDATE C04dbservice.mesa SET ID_EstadoMesa= '" + mesa.getEstadoMesa()
+					+ "' where ID_Mesa= '" + mesa.getID() + "';");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

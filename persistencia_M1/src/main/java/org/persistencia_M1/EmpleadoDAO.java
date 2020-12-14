@@ -11,7 +11,7 @@ import org.dominio.Restaurante;
 
 public class EmpleadoDAO {
 	public static void SelectTodosEmpleados(ArrayList<CamareroBarra> CamarerosBarra, ArrayList<CamareroMesa> CamarerosMesa, ArrayList<JefeSala> JefesSala) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.empleado");
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.empleado");
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
@@ -55,7 +55,7 @@ public class EmpleadoDAO {
 	}
 
 	public static Empleado SelectEmpleadoPorID(int ID) throws SQLException {
-		ResultSet result = Agente.Select("SELECT * FROM isolab.empleado where ID_Empleado = " + ID);
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.empleado where ID_Empleado = " + ID);
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
