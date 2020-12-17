@@ -20,61 +20,38 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
-public class vistaPlato extends JPanel {
+public class VistaCuenta extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public vistaPlato(final Plato plato, final int idRestaurante, final Comanda comanda) {
+	public VistaCuenta(String nombre, String precio) {
 		
 		addMouseListener(new ThisMouseListener());
 		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{64, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{45, 97, 119, 0, 0};
+		gridBagLayout.rowHeights = new int[]{30, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel txt_plato = new JLabel("Plato: ");
-		GridBagConstraints gbc_txt_plato = new GridBagConstraints();
-		gbc_txt_plato.anchor = GridBagConstraints.EAST;
-		gbc_txt_plato.fill = GridBagConstraints.VERTICAL;
-		gbc_txt_plato.insets = new Insets(0, 0, 0, 5);
-		gbc_txt_plato.gridx = 0;
-		gbc_txt_plato.gridy = 0;
-		add(txt_plato, gbc_txt_plato);
-		
-		JLabel nombrePlato = new JLabel(plato.getNombre());
+		JLabel nombrePlato = new JLabel(nombre);
+		nombrePlato.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_nombrePlato = new GridBagConstraints();
+		gbc_nombrePlato.anchor = GridBagConstraints.WEST;
 		gbc_nombrePlato.insets = new Insets(0, 0, 0, 5);
 		gbc_nombrePlato.gridx = 1;
 		gbc_nombrePlato.gridy = 0;
 		add(nombrePlato, gbc_nombrePlato);
 		
-		JButton addPlato = new JButton("Añadir");
-		addPlato.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switch(plato.getTipo()) {
-				case 1:
-					comanda.getEntrantes().add(plato);
-					break;
-				case 2:
-					comanda.getPrimerPlato().add(plato);	
-					break;
-				case 3:
-					comanda.getSegundoPlato().add(plato);
-					break;
-				case 4:
-					comanda.getPostre().add(plato);
-					break;
-				}
-				
-				PlatoDAO.eliminarUnPlatoRestaurante(idRestaurante, plato.getIdPlato());
-			}
-		});
+		JLabel addPlato = new JLabel(precio);
+		addPlato.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_addPlato = new GridBagConstraints();
+		gbc_addPlato.insets = new Insets(0, 0, 0, 5);
+		gbc_addPlato.anchor = GridBagConstraints.EAST;
 		gbc_addPlato.gridx = 2;
 		gbc_addPlato.gridy = 0;
 		add(addPlato, gbc_addPlato);

@@ -57,7 +57,7 @@ public class BebidaDAO {
 		 * 
 		 * */
 		try {
-			st.executeUpdate("UPDATE BEBIDA_ALMACEN "
+			st.executeUpdate("UPDATE bebida_almacen "
 						   + "SET  cantidad = cantidad-1 "
 						   + "WHERE ID_Restaurante="+idRestaurante
 						   + " AND ID_Bebida="+idBebida+";");

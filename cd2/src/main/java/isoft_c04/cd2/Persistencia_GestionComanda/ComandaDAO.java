@@ -25,7 +25,7 @@ public class ComandaDAO {
 		
 		try {
 			st.executeUpdate("insert into comanda (ID_Mesa, precio) "
-						   + "values ("+1+","+calcularPrecio(comanda.getIdComanda())+");");
+						   + "values ("+comanda.getIdMesa()+","+calcularPrecio(comanda.getIdComanda())+");");
 			// HAY QUE PONER EN EL 1 EL NUMERO DE MESA
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -35,7 +35,7 @@ public class ComandaDAO {
 		for(Plato pl : totalPlatos) {
 			
 			try {
-				st.executeUpdate("INSERT INTO COMANDA_PLATO (ID_Comanda, ID_Plato) "
+				st.executeUpdate("INSERT INTO comanda_plato (ID_Comanda, ID_Plato) "
 						       + "VALUES ("+comanda.getIdComanda()+","+pl.getIdPlato()+");");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -48,7 +48,7 @@ public class ComandaDAO {
 			for(Bebida be : comanda.getBebidas()) {
 				
 				try {
-					st.executeUpdate("INSERT INTO COMANDA_BEBIDA (ID_Comanda, ID_Bebida) "
+					st.executeUpdate("INSERT INTO comanda_bebida (ID_Comanda, ID_Bebida) "
 								   + "VALUES ("+comanda.getIdComanda()+","+be.getIdBebida()+");");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -75,86 +75,54 @@ public class ComandaDAO {
 		}
 	}
 
-	public void imprimirCuenta(int idMesa) {
+	public static ArrayList<String[]> imprimirCuenta(int idMesa) {
 		// TODO - implement ComandaDAO.imprimirCuenta
 		
 		ResultSet query;
 		int idComanda = 0;
+		ArrayList<String[]> pedidos = new ArrayList<String[]>();
 		
 		try {
 			
 			query = Agente.consultaBD("select max(ID_Comanda)\r\n"
-					+ "from comanda\r\n"
-					+ "where ID_Mesa = "+idMesa+";");
+									+ "from comanda\r\n"
+									+ "where ID_Mesa = "+idMesa+";");
 
 			
 			if(query.next())idComanda=query.getInt("max(ID_Comanda)");
 		
 			query = Agente.consultaBD("select c.ID_Plato, p.nombre, p.precio\r\n"
 									+ "from plato p, comanda_plato c\r\n"
-									+ "where c.ID_Plato = p.ID_plato\r\n"
-									+ "and p.tipoPlato=1"
+									+ "where c.ID_Plato = p.ID_Plato\r\n"
 									+ "and c.ID_Comanda = "+idComanda+";");
 			
-			System.out.println(" --- ENTRANTES ---");
-			
 			while(query.next()) {
-				System.out.println(query.getInt("ID_Plato")+" - "+query.getString("nombre")+"\t\t"+query.getDouble("precio"));
+				String[] plato = new String[2];
+				plato[0] = query.getString("nombre");
+				plato[1] = String.valueOf(query.getInt("precio"));
+				pedidos.add(plato);
 			}
 			
-			query = Agente.consultaBD("select c.ID_Plato, p.nombre, p.precio\r\n"
-									+ "from plato p, comanda_plato c\r\n"
-									+ "where c.ID_Plato = p.ID_plato\r\n"
-									+ "and p.tipoPlato=2"
-									+ "and c.ID_Comanda = "+idComanda+";");
-	
-			System.out.println(" --- PRIMER PLATO ---");
-			
-			while(query.next()) {
-				System.out.println(query.getInt("ID_Plato")+" - "+query.getString("nombre")+"\t\t"+query.getDouble("precio"));
-			}
-			
-			query = Agente.consultaBD("select c.ID_Plato, p.nombre, p.precio\r\n"
-									+ "from plato p, comanda_plato c\r\n"
-									+ "where c.ID_Plato = p.ID_plato\r\n"
-									+ "and p.tipoPlato=3"
-									+ "and c.ID_Comanda = "+idComanda+";");
-			
-			System.out.println(" --- SEGUNDO PLATO ---");
-			
-			while(query.next()) {
-				System.out.println(query.getInt("ID_Plato")+" - "+query.getString("nombre")+"\t\t"+query.getDouble("precio"));
-			}
-			
-			query = Agente.consultaBD("select c.ID_Plato, p.nombre, p.precio\r\n"
-									+ "from plato p, comanda_plato c\r\n"
-									+ "where c.ID_Plato = p.ID_plato\r\n"
-									+ "and p.tipoPlato=4"
-									+ "and c.ID_Comanda = "+idComanda+";");
-			
-			
-			while(query.next()) {
-				System.out.println(query.getInt("ID_Plato")+" - "+query.getString("nombre")+"\t\t"+query.getDouble("precio"));
-			}
-			
-			System.out.println(" --- BEBIDAS ---");
-			
-			query = Agente.consultaBD("select c.ID_Bebida, p.nombre, p.precio\r\n"
+			query = Agente.consultaBD("select c.ID_Bebida, b.nombre, b.precio\r\n"
 									+ "from bebida b, comanda_bebida c\r\n"
-									+ "where c.ID_Bebida = p.ID_Bebida\r\n"
+									+ "where c.ID_Bebida = b.ID_Bebida\r\n"
 									+ "and c.ID_Comanda = "+idComanda+";");
 			
 			while(query.next()) {
-				System.out.println(query.getInt("ID_Bebida")+" - "+query.getString("nombre")+"\t\t"+query.getDouble("precio"));
+				String[] plato = new String[2];
+				plato[0] = query.getString("nombre");
+				plato[1] = String.valueOf(query.getInt("precio"));
+				pedidos.add(plato);
 			}
+			
+			return pedidos;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 		
-		
-		throw new UnsupportedOperationException();
+		return null;	
 		
 	}
 
@@ -165,17 +133,17 @@ public class ComandaDAO {
 			
 			try {
 				query = Agente.consultaBD("SELECT SUM(precio) "
-										+ "FROM BEBIDA "
+										+ "FROM bebida "
 										+ "WHERE ID_Bebida IN (SELECT ID_Bebida "
-															+ "FROM COMANDA_BEBIDA "
+															+ "FROM comanda_bebida "
 															+ "WHERE ID_Comanda="+idComanda+");");
 				
 				if(query.next())precio+=query.getInt("SUM(precio)");
 				
 				query = Agente.consultaBD("SELECT SUM(precio) "
-							            + "FROM PLATO "
+							            + "FROM plato "
 							            + "WHERE ID_Plato IN (SELECT ID_Plato "
-							            				   + "FROM COMANDA_PLATO "
+							            				   + "FROM comanda_plato "
 							           					   + "WHERE ID_Comanda="+idComanda+");");
 				
 				if(query.next())precio+=query.getInt("SUM(precio)");

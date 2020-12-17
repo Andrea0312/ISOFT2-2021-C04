@@ -100,11 +100,11 @@ public class PlatoDAO {
 		 * 
 		 */
 		try {
-			st.executeUpdate("UPDATE INGREDIENTE_ALMACEN " 
+			st.executeUpdate("UPDATE ingrediente_almacen " 
 						   + "SET  cantidad = cantidad-1 "
 						   + "WHERE ID_Restaurante="+ idRestaurante 
 						   + " AND ID_Ingrediente IN (SELECT ID_Ingrediente " 
-						   						   + "FROM PLATO_INGREDIENTE "
+						   						   + "FROM plato_ingrediente "
 						   						   + "WHERE ID_Plato=" + idPlato + ");");
 		} catch (SQLException e) {
 			e.printStackTrace();

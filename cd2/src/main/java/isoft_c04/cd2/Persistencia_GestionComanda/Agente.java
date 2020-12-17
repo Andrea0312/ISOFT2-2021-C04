@@ -5,13 +5,13 @@ import java.sql.*;
 public class Agente {
 	
 	private static final String CONTROLADOR = "com.mysql.cj.jdbc.Driver";
-//    private static final String URL = "jdbc:mysql://172.20.48.70/C04dbservice?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-//    private static final String USUARIO = "C04";
-//    private static final String CLAVE = "@ISoft2.2020#";
+    private static final String URL = "jdbc:mysql://172.20.48.70/C04dbservice?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String USUARIO = "C04";
+    private static final String CLAVE = "@ISoft2.2020#";
     
-    private static final String URL = "jdbc:mysql://localhost/isolab?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private static final String USUARIO = "root";
-    private static final String CLAVE = "ISO2c04//2020";
+//    private static final String URL = "jdbc:mysql://localhost/isolab?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+//    private static final String USUARIO = "root";
+//    private static final String CLAVE = "ISO2c04//2020";
 
 	public static Statement conectar() {
 		// TODO - implement Agente.conectar

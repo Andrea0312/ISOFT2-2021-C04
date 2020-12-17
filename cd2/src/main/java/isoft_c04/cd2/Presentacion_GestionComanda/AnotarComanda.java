@@ -32,6 +32,7 @@ import java.awt.GridLayout;
 import javax.swing.ScrollPaneConstants;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.Font;
 
 public class AnotarComanda extends JFrame{
 	
@@ -50,6 +51,9 @@ public class AnotarComanda extends JFrame{
 	private JButton addBebida;
 	private JButton btnAdd;
 	private int idMesa;
+	private JButton selectMesa;
+	private JButton addComanda;
+	private JSpinner spinner_idMesa;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -75,40 +79,39 @@ public class AnotarComanda extends JFrame{
 		cambiarPanelBusqueda listenerAdd = new cambiarPanelBusqueda();
 		cambiarPanelComanda listenerComanda = new cambiarPanelComanda();
 		
-		
 		JPanel anotarComanda = new JPanel();
 		anotarComanda.setMaximumSize(new Dimension(290, 32767));
 		getContentPane().add(anotarComanda, "anotarComanda");
 		anotarComanda.setLayout(null);
 		
-		JSpinner spinner_idMesa = new JSpinner();
-		spinner_idMesa.setBounds(137, 53, 45, 20);
+		spinner_idMesa = new JSpinner();
+		spinner_idMesa.setBounds(92, 53, 45, 20);
 		anotarComanda.add(spinner_idMesa);
-		
-		idMesa = (int) spinner_idMesa.getValue();
-		
+				
 		addEntrante = new JButton("Entrante");
+		addEntrante.setVisible(false);
 		addEntrante.setBounds(31, 124, 90, 40);
 		anotarComanda.add(addEntrante);
 		addEntrante.addActionListener(listenerAdd);
 		
 		addPrimero = new JButton("Primero");
+		addPrimero.setVisible(false);
 		addPrimero.setBounds(151, 124, 90, 40);
 		anotarComanda.add(addPrimero);
 		addPrimero.addActionListener(listenerAdd);
 
 		addSegundo = new JButton("Segundo");
+		addSegundo.setVisible(false);
 		addSegundo.setBounds(31, 175, 90, 40);
 		anotarComanda.add(addSegundo);
 		addSegundo.addActionListener(listenerAdd);
 
 		addPostre = new JButton("Postre");
+		addPostre.setVisible(false);
 		addPostre.setBounds(151, 175, 90, 40);
 		anotarComanda.add(addPostre);
 		addPostre.addActionListener(listenerAdd);
 		
-		comanda.setIdMesa(idMesa);
-		ComandaDAO.crearComanda(idMesa);
 		try {
 			ResultSet query = Agente.consultaBD("select ID_Restaurante "
 						 					  + "from mesa "
@@ -122,7 +125,8 @@ public class AnotarComanda extends JFrame{
 			e2.printStackTrace();
 		}
 		
-		JButton addComanda = new JButton("Añadir Comanda");
+		addComanda = new JButton("Añadir Comanda");
+		addComanda.setVisible(false);
 		addComanda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -144,13 +148,36 @@ public class AnotarComanda extends JFrame{
 		anotarComanda.add(addComanda);
 		
 		JLabel txt_idMesa = new JLabel("Mesa nº:");
-		txt_idMesa.setBounds(92, 56, 46, 14);
+		txt_idMesa.setBounds(31, 56, 51, 14);
 		anotarComanda.add(txt_idMesa);
 		
 		addBebida = new JButton("Bebida");
+		addBebida.setVisible(false);
 		addBebida.setBounds(92, 226, 90, 40);
 		anotarComanda.add(addBebida);
 		addBebida.addActionListener(listenerAdd);
+		
+		selectMesa = new JButton("Seleccionar Mesa");
+		selectMesa.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		selectMesa.setBounds(147, 52, 115, 23);
+		anotarComanda.add(selectMesa);
+		selectMesa.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				idMesa = (int) spinner_idMesa.getValue();
+				comanda.setIdMesa(idMesa);
+				ComandaDAO.crearComanda(idMesa);
+				
+				addPrimero.setVisible(true);
+				addEntrante.setVisible(true);
+				addSegundo.setVisible(true);
+				addPostre.setVisible(true);
+				addBebida.setVisible(true);
+				addComanda.setVisible(true);
+				
+			}
+		});
+		
 		
 		JScrollPane scroll_lista = new JScrollPane();
 		scroll_lista.setMaximumSize(new Dimension(290, 32767));
