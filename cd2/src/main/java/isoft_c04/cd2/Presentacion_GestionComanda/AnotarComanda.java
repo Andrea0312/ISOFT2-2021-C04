@@ -21,7 +21,6 @@ import javax.swing.JSpinner;
 
 import isoft_c04.cd2.Dominio_GestionComanda.Bebida;
 import isoft_c04.cd2.Dominio_GestionComanda.Comanda;
-import isoft_c04.cd2.Dominio_GestionComanda.Mesa;
 import isoft_c04.cd2.Dominio_GestionComanda.Plato;
 import isoft_c04.cd2.Persistencia_GestionComanda.Agente;
 import isoft_c04.cd2.Persistencia_GestionComanda.BebidaDAO;
@@ -50,12 +49,13 @@ public class AnotarComanda extends JFrame{
 	private JButton addPostre;
 	private JButton addBebida;
 	private JButton btnAdd;
+	private int idMesa;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AnotarComanda frame = new AnotarComanda(1);
+					AnotarComanda frame = new AnotarComanda();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,23 +64,9 @@ public class AnotarComanda extends JFrame{
 		});
 	}
 	
-	public AnotarComanda(final int idMesa) {
+	public AnotarComanda() {
 		
-		int idRestaurante=0;;
-		comanda.setIdMesa(idMesa);
-//		ComandaDAO.crearComanda(idMesa);
-		try {
-			ResultSet query = Agente.consultaBD("select ID_Restaurante "
-						 					  + "from mesa "
-						 					  + "where ID_Mesa="+idMesa+";");
-			if(query.next()){
-				idRestaurante = query.getInt(1);
-			}
-			comanda.setIdRestaurante(idRestaurante);
-						
-		} catch (SQLException e2) {
-			e2.printStackTrace();
-		}
+		int idRestaurante=0;
 		
 		setResizable(false);
 		setMinimumSize(new Dimension(290, 450));
@@ -94,6 +80,12 @@ public class AnotarComanda extends JFrame{
 		anotarComanda.setMaximumSize(new Dimension(290, 32767));
 		getContentPane().add(anotarComanda, "anotarComanda");
 		anotarComanda.setLayout(null);
+		
+		JSpinner spinner_idMesa = new JSpinner();
+		spinner_idMesa.setBounds(137, 53, 45, 20);
+		anotarComanda.add(spinner_idMesa);
+		
+		idMesa = (int) spinner_idMesa.getValue();
 		
 		addEntrante = new JButton("Entrante");
 		addEntrante.setBounds(31, 124, 90, 40);
@@ -115,6 +107,21 @@ public class AnotarComanda extends JFrame{
 		anotarComanda.add(addPostre);
 		addPostre.addActionListener(listenerAdd);
 		
+		comanda.setIdMesa(idMesa);
+		ComandaDAO.crearComanda(idMesa);
+		try {
+			ResultSet query = Agente.consultaBD("select ID_Restaurante "
+						 					  + "from mesa "
+						 					  + "where ID_Mesa="+idMesa+";");
+			if(query.next()){
+				idRestaurante = query.getInt(1);
+			}
+			comanda.setIdRestaurante(idRestaurante);
+						
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+		
 		JButton addComanda = new JButton("Añadir Comanda");
 		addComanda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,16 +139,13 @@ public class AnotarComanda extends JFrame{
 				}
 			}
 		});
+		
 		addComanda.setBounds(75, 318, 130, 50);
 		anotarComanda.add(addComanda);
 		
 		JLabel txt_idMesa = new JLabel("Mesa nº:");
 		txt_idMesa.setBounds(92, 56, 46, 14);
 		anotarComanda.add(txt_idMesa);
-		
-		JSpinner spinner_idMesa = new JSpinner();
-		spinner_idMesa.setBounds(137, 53, 45, 20);
-		anotarComanda.add(spinner_idMesa);
 		
 		addBebida = new JButton("Bebida");
 		addBebida.setBounds(92, 226, 90, 40);
