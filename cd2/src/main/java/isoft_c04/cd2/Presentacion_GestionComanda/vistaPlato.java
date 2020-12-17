@@ -12,7 +12,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 
+import isoft_c04.cd2.Dominio_GestionComanda.Comanda;
 import isoft_c04.cd2.Dominio_GestionComanda.Plato;
+import isoft_c04.cd2.Persistencia_GestionComanda.PlatoDAO;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,7 +26,7 @@ public class vistaPlato extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public vistaPlato(Plato plato) {
+	public vistaPlato(final Plato plato, final int idRestaurante, final Comanda comanda) {
 		
 		addMouseListener(new ThisMouseListener());
 		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -52,6 +54,25 @@ public class vistaPlato extends JPanel {
 		add(nombrePlato, gbc_nombrePlato);
 		
 		JButton addPlato = new JButton("Añadir");
+		addPlato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switch(plato.getTipo()) {
+				case 1:
+					comanda.getEntrantes().add(plato);
+					break;
+				case 2:
+					comanda.getPrimerPlato().add(plato);	
+					break;
+				case 3:
+					comanda.getSegundoPlato().add(plato);
+					break;
+				case 4:
+					comanda.getPostre().add(plato);
+					break;
+				}
+				PlatoDAO.eliminarUnPlatoRestaurante(idRestaurante, plato.getIdPlato());
+			}
+		});
 		GridBagConstraints gbc_addPlato = new GridBagConstraints();
 		gbc_addPlato.gridx = 2;
 		gbc_addPlato.gridy = 0;

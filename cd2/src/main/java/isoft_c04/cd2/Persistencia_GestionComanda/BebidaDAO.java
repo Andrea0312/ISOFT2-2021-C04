@@ -21,9 +21,9 @@ public class BebidaDAO {
 		try {
 			
 			ResultSet result = Agente.consultaBD("SELECT A.ID_Bebida, B.precio, A.cantidad, A.ID_Restaurante, B.nombre "
-	 				   + "FROM bebida_almacen A, bebida B "
-	 				   + "WHERE A.ID_Bebida=B.ID_Bebida "
-	 				   + "AND A.ID_Restaurante="+idRestaurante+";");
+	 				   						   + "FROM bebida_almacen A, bebida B "
+	 				   						   + "WHERE A.ID_Bebida=B.ID_Bebida "
+	 				   						   + "AND A.ID_Restaurante="+idRestaurante+";");
 			
 			while (result.next()) {
 				Bebida b = new Bebida(result.getInt("ID_Bebida")

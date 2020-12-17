@@ -23,13 +23,32 @@ public class Comanda {
 	 * @param primerPlato
 	 * @param segundoPlato
 	 */
-	public Comanda(int idComanda, int idRestaurante, double precio, ArrayList<Plato> entrantes, ArrayList<Plato> primerPlato, ArrayList<Plato> segundoPlato) {
-		// TODO - implement Comanda.Comanda
-		throw new UnsupportedOperationException();
+	
+	
+	
+	public Comanda() {
+		
 	}
 
-	public int getIdComanda() {
-		return this.idComanda;
+	public Comanda(int idRestaurante, ArrayList<Bebida> bebidas,
+			ArrayList<Plato> entrantes, ArrayList<Plato> primerPlato, ArrayList<Plato> segundoPlato,
+			ArrayList<Plato> postre, int idMesa) {
+		super();
+		this.idRestaurante = idRestaurante;
+		this.bebidas = bebidas;
+		this.entrantes = entrantes;
+		this.primerPlato = primerPlato;
+		this.segundoPlato = segundoPlato;
+		this.postre = postre;
+		this.idMesa = idMesa;
+	}
+
+	public int getIdMesa() {
+		return idMesa;
+	}
+
+	public void setIdMesa(int idMesa) {
+		this.idMesa = idMesa;
 	}
 
 	/**
@@ -38,6 +57,10 @@ public class Comanda {
 	 */
 	public void setIdComanda(int idComanda) {
 		this.idComanda = idComanda;
+	}
+	
+	public int getIdComanda() {
+		return this.idComanda;
 	}
 
 	public int getIdRestaurante() {

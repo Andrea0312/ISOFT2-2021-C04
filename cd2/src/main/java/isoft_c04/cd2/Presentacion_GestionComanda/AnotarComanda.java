@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -18,10 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
 import isoft_c04.cd2.Dominio_GestionComanda.Bebida;
+import isoft_c04.cd2.Dominio_GestionComanda.Comanda;
 import isoft_c04.cd2.Dominio_GestionComanda.Mesa;
 import isoft_c04.cd2.Dominio_GestionComanda.Plato;
+import isoft_c04.cd2.Persistencia_GestionComanda.Agente;
 import isoft_c04.cd2.Persistencia_GestionComanda.BebidaDAO;
+import isoft_c04.cd2.Persistencia_GestionComanda.ComandaDAO;
 import isoft_c04.cd2.Persistencia_GestionComanda.PlatoDAO;
+import isoft_c04.cd2.Persistencia_GestionComanda.ComandaDAO;
 
 import java.awt.GridLayout;
 import javax.swing.ScrollPaneConstants;
@@ -29,10 +35,10 @@ import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 
 public class AnotarComanda extends JFrame{
-
 	
 	static ArrayList<Bebida> bebidas = new ArrayList<Bebida>();
 	static ArrayList<Plato> platos = new ArrayList<Plato>();
+	static Comanda comanda = new Comanda();
 	
 	static JPanel panel_lista = new JPanel();
 	static JPanel panel_botones = new JPanel();
@@ -49,7 +55,7 @@ public class AnotarComanda extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AnotarComanda frame = new AnotarComanda();
+					AnotarComanda frame = new AnotarComanda(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +64,23 @@ public class AnotarComanda extends JFrame{
 		});
 	}
 	
-	public AnotarComanda() {
+	public AnotarComanda(final int idMesa) {
+		
+		int idRestaurante=0;;
+		comanda.setIdMesa(idMesa);
+//		ComandaDAO.crearComanda(idMesa);
+		try {
+			ResultSet query = Agente.consultaBD("select ID_Restaurante "
+						 					  + "from mesa "
+						 					  + "where ID_Mesa="+idMesa+";");
+			if(query.next()){
+				idRestaurante = query.getInt(1);
+			}
+			comanda.setIdRestaurante(idRestaurante);
+						
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
 		
 		setResizable(false);
 		setMinimumSize(new Dimension(290, 450));
@@ -94,6 +116,22 @@ public class AnotarComanda extends JFrame{
 		addPostre.addActionListener(listenerAdd);
 		
 		JButton addComanda = new JButton("Añadir Comanda");
+		addComanda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ResultSet query =  Agente.consultaBD("select max(ID_Comanda)\r\n"
+													   + "from comanda\r\n"
+													   + "where ID_Mesa = "+idMesa+";");
+					if(query.next()){
+						comanda.setIdComanda(query.getInt(1)+1);
+					}
+					ComandaDAO.addComanda(comanda);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		addComanda.setBounds(75, 318, 130, 50);
 		anotarComanda.add(addComanda);
 		
@@ -101,9 +139,9 @@ public class AnotarComanda extends JFrame{
 		txt_idMesa.setBounds(92, 56, 46, 14);
 		anotarComanda.add(txt_idMesa);
 		
-		JSpinner idMesa = new JSpinner();
-		idMesa.setBounds(137, 53, 45, 20);
-		anotarComanda.add(idMesa);
+		JSpinner spinner_idMesa = new JSpinner();
+		spinner_idMesa.setBounds(137, 53, 45, 20);
+		anotarComanda.add(spinner_idMesa);
 		
 		addBebida = new JButton("Bebida");
 		addBebida.setBounds(92, 226, 90, 40);
@@ -130,10 +168,6 @@ public class AnotarComanda extends JFrame{
 		panelBotones.add(btnVolver);
 		btnVolver.addActionListener(listenerComanda);
 
-		btnAdd = new JButton("Añadir");
-		panelBotones.add(btnAdd);
-		btnAdd.addActionListener(listenerComanda);
-
 		panel_busqueda.add(scroll_lista, BorderLayout.CENTER);
 		
 	}
@@ -141,8 +175,9 @@ public class AnotarComanda extends JFrame{
 	private static void mostrarBebidas(int idRestaurante) {
 		
 		bebidas=BebidaDAO.obtenerBebida(idRestaurante);
+		comanda.setBebidas(bebidas);
 		for(Bebida be : bebidas) {		
-			panel_lista.add( new vistaBebida(be));
+			panel_lista.add( new vistaBebida(be, idRestaurante, comanda));
 			panel_lista.revalidate();
 		}
 	}
@@ -150,12 +185,7 @@ public class AnotarComanda extends JFrame{
 	private class cambiarPanelComanda implements ActionListener {
 		
 		public void actionPerformed(ActionEvent arg0) {
-			JButton auxBoton = (JButton) arg0.getSource();
 			((CardLayout) getContentPane().getLayout()).show(getContentPane(), "anotarComanda");
-			if(auxBoton.equals(btnAdd)) {
-				
-			}
-			
 		}
 	}
 	
@@ -182,10 +212,28 @@ public class AnotarComanda extends JFrame{
 	private static void mostrarPlatos(int idRestaurante, int tipoPlato) {
 		
 		platos = PlatoDAO.obtenerPlatos(idRestaurante, tipoPlato);
+		
+		switch(tipoPlato) {
+		case 1:
+			comanda.setEntrantes(platos);
+			break;
+		case 2:
+			comanda.setPrimerPlato(platos);
+			break;
+		case 3:
+			comanda.setSegundoPlato(platos);
+			break;
+		case 4:
+			comanda.setPostre(platos);
+			break;
+		}
+		
+		
 		for(Plato pl : platos) {
 			System.out.println(pl.toString());
-			panel_lista.add(new vistaPlato(pl));
+			panel_lista.add(new vistaPlato(pl,idRestaurante,comanda));
 			panel_lista.revalidate();	
 		}
+		
 	}
 }

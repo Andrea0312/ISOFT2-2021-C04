@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 
 import isoft_c04.cd2.Dominio_GestionComanda.Bebida;
+import isoft_c04.cd2.Dominio_GestionComanda.Comanda;
+import isoft_c04.cd2.Persistencia_GestionComanda.BebidaDAO;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,7 +26,7 @@ public class vistaBebida extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public vistaBebida(Bebida bebida) {
+	public vistaBebida(final Bebida bebida, final int idRestaurante, final Comanda comanda) {
 		setMinimumSize(new Dimension(290, 40));
 		setMaximumSize(new Dimension(290, 40));
 		
@@ -55,6 +57,12 @@ public class vistaBebida extends JPanel {
 		add(nombreBebida, gbc_nombreBebida);
 		
 		JButton addPlato = new JButton("Añadir");
+		addPlato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comanda.getBebidas().add(bebida);
+				BebidaDAO.eliminarUnaBebida(idRestaurante, bebida.getIdBebida());
+			}
+		});
 		GridBagConstraints gbc_addPlato = new GridBagConstraints();
 		gbc_addPlato.gridx = 2;
 		gbc_addPlato.gridy = 0;
