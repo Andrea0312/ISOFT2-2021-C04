@@ -9,6 +9,9 @@ public class Agente {
     private static final String USUARIO = "C04";
     private static final String CLAVE = "@ISoft2.2020#";
  
+//  private static final String URL = "jdbc:mysql://localhost/isolab?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+//  private static final String USUARIO = "root";
+//  private static final String CLAVE = "ISO2c04//2020";
     
     public static Statement Conectar()  {
         Connection conexion = null;
