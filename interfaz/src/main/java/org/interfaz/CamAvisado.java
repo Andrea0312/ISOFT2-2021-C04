@@ -32,7 +32,7 @@ public class CamAvisado extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public CamAvisado() {
+	public CamAvisado() { 
 		
 		setVisible(true);
 		setBounds(100, 100, 402, 159);

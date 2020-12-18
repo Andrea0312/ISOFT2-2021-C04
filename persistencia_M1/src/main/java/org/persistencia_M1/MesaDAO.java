@@ -19,7 +19,7 @@ public class MesaDAO {
 		CamareroMesa CamareroMesa = null;
 		int tamano = -1;
 		int estado = -1;
-		Mesa mAux = null;
+		Mesa mAux = null; 
 
 		try {
 			while (result.next()) {

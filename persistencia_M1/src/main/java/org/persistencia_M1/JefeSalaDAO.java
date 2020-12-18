@@ -14,7 +14,7 @@ public class JefeSalaDAO {
 			cadena+=jefesSala.remove(0).toString()+"\n";
 		}
 		return cadena;
-	}
+	} 
 	public static JefeSala SelectJefeSalaPorID(int ID) throws SQLException {
 		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.empleado where ID_Empleado = " + ID + " and Tipo = 'JS'");
 		int id = -1;

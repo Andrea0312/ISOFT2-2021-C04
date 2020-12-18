@@ -6,7 +6,7 @@ public class Empleado {
 	private String Nombre;
 	private String Apellido;
 	private String Telefono;
-	 
+	  
 	public Empleado(int iD, Restaurante rest, String nombre, String apellido, String telefono) {
 		ID = iD;
 		Restaurante = rest;

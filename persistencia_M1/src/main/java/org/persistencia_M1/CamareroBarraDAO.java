@@ -15,13 +15,13 @@ public class CamareroBarraDAO {
 		}
 		return cadena;
 	}
-
+ 
 	public static CamareroBarra SelectCamareroBarraPorID(int ID) throws SQLException {
 		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.empleado where ID_Empleado = " + ID + " and Tipo = 'CB'");
 		int id = -1;
 		int idRestaurante = -1;
 		Restaurante restaurante = null;
-		String nombre = "";
+		String nombre = ""; 
 		String apellido = "";
 		String telefono = "";
 

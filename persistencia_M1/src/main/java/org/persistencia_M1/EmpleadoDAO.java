@@ -19,7 +19,7 @@ public class EmpleadoDAO {
 		String apellido = "";
 		String telefono = "";
 		String tipo = "";
-
+ 
 		try {
 			while (result.next()) {
 				id = result.getInt("ID_Empleado");

@@ -5,7 +5,7 @@ public class Restaurante {
 	private String Nombre;
 	private String Ciudad;
 	private double tiempoTomaComandas;
-	private double tiempoPrepComida;
+	private double tiempoPrepComida;  
 	private double tiempoEntregaNota;
 	private double tiempoMesaLire;
 	private Empleado[] empleados;

@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 public class CambiarEstadoMesa {
 
 	private JFrame frame;
+	private JLabel labelEstado;
 	private JTextField textFieldIDMesa;
 	private JTextField MesaIDtextField;
 	private ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
@@ -70,7 +71,7 @@ public class CambiarEstadoMesa {
 
 		JLabel lblSeleccioneElEstado = new JLabel("Seleccione el estado:");
 
-		final JLabel labelEstado = new JLabel("");
+		labelEstado = new JLabel("");
 		JButton btnAceptar = new JButton("Aceptar");
 
 		JTextArea textArea = new JTextArea();
@@ -86,17 +87,16 @@ public class CambiarEstadoMesa {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String idMesa = textFieldIDMesa.getText();
-				int idM = Integer.parseInt(idMesa);
-
 				try {
-					System.out.println(idM);
-					Mesa mesa = MesaDAO.SelectMesaPorID(idM);
-					mesa.cambiarEstadoMesa();
-					MesaDAO.UpdateMesaEstado(mesa);
-				} catch (SQLException e1) {
-					e1.printStackTrace();
+					int idM = Integer.parseInt(idMesa);
+					if(idM>0) {
+						cambiar(idM);
+					}else {
+						labelEstado.setText("Introduzca un valor positivo");
+					}
+				} catch(final NumberFormatException e1) {
+					labelEstado.setText("Introduzca un valor numerico");
 				}
-				labelEstado.setText("Estado actualizado correctamente");
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -181,5 +181,18 @@ public class CambiarEstadoMesa {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	public void cambiar(int idM) {
+		try {
+			System.out.println(idM);
+			Mesa mesa = MesaDAO.SelectMesaPorID(idM);
+			mesa.cambiarEstadoMesa();
+			MesaDAO.UpdateMesaEstado(mesa);
+			labelEstado.setText("Estado actualizado correctamente");
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			labelEstado.setText("Ocurrió un error al actualizar el estado");
+		}	
 	}
 }

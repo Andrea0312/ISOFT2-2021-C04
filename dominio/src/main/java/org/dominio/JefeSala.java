@@ -1,7 +1,7 @@
 package org.dominio;
 
 public class JefeSala extends Empleado{
-
+ 
 		public JefeSala(int iD, Restaurante restaurante, String nombre, String apellido, String telefono) {
 		super(iD, restaurante, nombre, apellido, telefono);
 		}

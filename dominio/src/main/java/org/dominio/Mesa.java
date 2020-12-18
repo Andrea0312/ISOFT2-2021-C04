@@ -1,7 +1,7 @@
 package org.dominio;
 
 public class Mesa {
-
+ 
 	private int ID;
 	private Restaurante Restaurante;
 	private CamareroMesa CamareroMesa;
@@ -58,8 +58,8 @@ public class Mesa {
 	}
 
 	public void cambiarEstadoMesa() {
-		if(estadoMesa == 8) {
-			estadoMesa = 0;
+		if(estadoMesa == 9) {
+			estadoMesa = 1;
 		}else {
 			estadoMesa++;
 		}

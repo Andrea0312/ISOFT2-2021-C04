@@ -11,12 +11,13 @@ import java.awt.event.ActionEvent;
 
 public class Inicio {
 
-	private JFrame frame;
+	public JFrame frame;
 	static boolean camareroAvisado = false;
 
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -29,6 +30,7 @@ public class Inicio {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the application.
@@ -59,7 +61,7 @@ public class Inicio {
 		btnCocina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				POVCocina Cocina = new POVCocina();
-			}
+			} 
 		});
 		btnCocina.setBounds(55, 207, 138, 61);
 		frame.getContentPane().add(btnCocina);

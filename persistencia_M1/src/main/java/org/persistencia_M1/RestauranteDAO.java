@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.dominio.Restaurante;
 
-
 public class RestauranteDAO {
 	public static void SelectTodosRestaurantes(ArrayList<Restaurante> restaurantes) throws SQLException {
         ResultSet result = Agente.Select("SELECT * FROM C04dbservice.restaurante");
@@ -14,7 +13,7 @@ public class RestauranteDAO {
         String ciudad = "";
         String direccion = "";
         //PROBAR
-
+ 
         try {
         	while(result.next()) {
 				id = result.getInt("ID_Restaurante");

@@ -9,7 +9,7 @@ public class Agente {
     private static final String USUARIO = "C04";
     private static final String CLAVE = "@ISoft2.2020#";
  
-    
+     
     public static Statement Conectar()  {
         Connection conexion = null;
         Statement stmt = null;
