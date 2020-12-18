@@ -6,6 +6,7 @@ public class Bebida {
 	private double precio;
 	private int cantidad;
 	private int idRestaurante;
+	
 	private String nombre;
 
 	/**
