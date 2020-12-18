@@ -4,7 +4,7 @@
 
 	<groupId>isoft_c04</groupId>
 	<artifactId>ISO2_Proyecto</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.8-SNAPSHOT</version>
  	<packaging>pom</packaging>
 
 	<name>ISO2_Proyecto</name>

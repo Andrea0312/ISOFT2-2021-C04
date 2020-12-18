@@ -25,5 +25,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="/dominio"/>
 	<classpathentry kind="src" path="/persistencia_M1"/>
+	<classpathentry kind="src" path="/persistencia_M2"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
