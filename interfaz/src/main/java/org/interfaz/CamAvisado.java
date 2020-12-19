@@ -16,7 +16,7 @@ public class CamAvisado extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	/**
+	/** 
 	 * Launch the application.
 	 */
 /*	public static void main(String[] args) {
