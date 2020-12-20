@@ -53,6 +53,9 @@ public class POVCocina {
 		});
 		btnAvisarCamarero.setBounds(12, 82, 153, 44);
 		frame.getContentPane().add(btnAvisarCamarero);
+		
+		JButton btnActualizarAlmacen = new JButton("Actualizar Almacen");
+		btnActualizarAlmacen.setBounds(12, 162, 153, 44);
+		frame.getContentPane().add(btnActualizarAlmacen);
 	}
-
 }

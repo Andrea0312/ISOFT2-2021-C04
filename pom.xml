@@ -82,5 +82,6 @@
 		<module>dominio</module>
 		<module>persistencia_M1</module>
     <module>persistencia_M2</module>
+    <module>persistencia_M4</module>
   </modules>
 </project>
