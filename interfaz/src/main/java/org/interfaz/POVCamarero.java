@@ -1,6 +1,6 @@
 package org.interfaz;
 
-import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -16,26 +16,18 @@ public class POVCamarero {
 	/**
 	 * Launch the application.
 	 */
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					POVCamarero window = new POVCamarero();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} 
-		});
-	}
-*/
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { POVCamarero window = new
+	 * POVCamarero(); window.frame.setVisible(true); } catch (Exception e) {
+	 * e.printStackTrace(); } } }); }
+	 */
 	/**
 	 * Create the application.
 	 */
 	public POVCamarero(boolean camareroAvisado) {
 		initialize(camareroAvisado);
 	}
-	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -46,23 +38,33 @@ public class POVCamarero {
 		frame.setBounds(100, 100, 596, 449);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JButton btnCambiarEstadoMesa = new JButton("Cambiar estado mesa");
 		btnCambiarEstadoMesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CambiarEstadoMesa window = new CambiarEstadoMesa();
+				new CambiarEstadoMesa();
 			}
 		});
 		btnCambiarEstadoMesa.setBounds(23, 99, 183, 50);
 		frame.getContentPane().add(btnCambiarEstadoMesa);
-		
+
 		JLabel iconAlarma = new JLabel("");
-		
+
 		iconAlarma.setEnabled(false);
-		iconAlarma.setIcon(new ImageIcon(POVCamarero.class.getResource("/org/interfaz/alarma.png")));
+
 		iconAlarma.setBounds(433, 0, 133, 128);
 		frame.getContentPane().add(iconAlarma);
-		if(camareroAvisado) {
+
+		JLabel label = new JLabel();
+		label.setFont(new Font("Times New Roman", Font.PLAIN, 17));
+		label.setBounds(10, 300, 500, 100);
+		frame.getContentPane().add(label);
+		try {
+			iconAlarma.setIcon(new ImageIcon(POVCamarero.class.getResource("/org/interfaz/alarma.png")));
+		} catch (Exception e) {
+			label.setText("No se ha encontrado la imagen.");
+		}
+		if (camareroAvisado) {
 			iconAlarma.setEnabled(true);
 		}
 		JLabel lblAvisoDeCocina = new JLabel("Aviso de cocina");

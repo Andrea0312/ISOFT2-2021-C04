@@ -7,4 +7,3 @@ public class CamareroMesa extends Empleado {
 	}
 
 }
-  

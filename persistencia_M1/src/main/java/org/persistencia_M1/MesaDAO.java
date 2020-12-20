@@ -1,6 +1,5 @@
 package org.persistencia_M1;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,17 +18,17 @@ public class MesaDAO {
 		CamareroMesa CamareroMesa = null;
 		int tamano = -1;
 		int estado = -1;
-		Mesa mAux = null; 
+		Mesa mAux = null;
 
 		try {
 			while (result.next()) {
 				id = result.getInt("ID_Mesa");
 				idRestaurante = result.getInt("ID_Restaurante");
-				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
 				idCamareroMesa = result.getInt("ID_Empleado");
-				CamareroMesa = CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
 				estado = result.getInt("ID_EstadoMesa");
+				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
+				CamareroMesa = CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
 				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
 				mesas.add(mAux);
 			}
@@ -42,7 +41,7 @@ public class MesaDAO {
 
 	public static String CadenaMesas(ArrayList<Mesa> mesas) {
 		String cadena = "";
-		for(int i = 0; i<mesas.size(); i++){
+		for (int i = 0; i < mesas.size(); i++) {
 			cadena += mesas.get(i).toString();
 		}
 		return cadena;
@@ -65,7 +64,7 @@ public class MesaDAO {
 				idRestaurante = result.getInt("ID_Restaurante");
 				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
 				idCamareroMesa = result.getInt("ID_Empleado");
-				CamareroMesa = (CamareroMesa) CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
+				CamareroMesa = CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
 				tamano = result.getInt("Tamaño");
 				estado = result.getInt("ID_EstadoMesa");
 				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
@@ -111,18 +110,18 @@ public class MesaDAO {
 		while (!mesas.isEmpty()) {
 			Mesa mesa = mesas.remove(0);
 			try {
-				PreparedStatement result = Agente.Update("UPDATE C04dbservice.mesa SET ID_Empleado= '" + mesa.getCamareroMesa().getID()
+				Agente.Update("UPDATE C04dbservice.mesa SET ID_Empleado= '" + mesa.getCamareroMesa().getID()
 						+ "' where ID_Mesa= '" + mesa.getID() + "'");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	public static void UpdateMesaEstado(Mesa mesa) {
 		try {
-			Agente.Update("UPDATE C04dbservice.mesa SET ID_EstadoMesa= '" + mesa.getEstadoMesa()
-					+ "' where ID_Mesa= '" + mesa.getID() + "';");
+			Agente.Update("UPDATE C04dbservice.mesa SET ID_EstadoMesa= '" + mesa.getEstadoMesa() + "' where ID_Mesa= '"
+					+ mesa.getID() + "';");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

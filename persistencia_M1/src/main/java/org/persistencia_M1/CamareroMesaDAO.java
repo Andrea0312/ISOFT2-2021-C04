@@ -29,10 +29,10 @@ public class CamareroMesaDAO {
 			if (result.next()) {
 				id = result.getInt("ID_Empleado");
 				idRestaurante = result.getInt("ID_Restaurante");
-				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
 				nombre = result.getString("nombre");
 				apellido = result.getString("apellido");
 				telefono = result.getString("telefono");
+				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
 				CamareroMesa camareroMesa = new CamareroMesa(id, restaurante, nombre, apellido, telefono);
 				return camareroMesa;
 			}

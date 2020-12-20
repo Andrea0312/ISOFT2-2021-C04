@@ -5,7 +5,7 @@ public class Restaurante {
 	private String Nombre;
 	private String Ciudad;
 	private double tiempoTomaComandas;
-	private double tiempoPrepComida;  
+	private double tiempoPrepComida;
 	private double tiempoEntregaNota;
 	private double tiempoMesaLire;
 	private Empleado[] empleados;
@@ -95,9 +95,9 @@ public class Restaurante {
 	public void setMesas(Mesa[] mesas) {
 		this.mesas = mesas;
 	}
-	
+
 	public String toString() {
-		return "ID: "+ID+", Ciudad: "+Ciudad+", Nombre: "+Nombre+".";
+		return "ID: " + ID + ", Ciudad: " + Ciudad + ", Nombre: " + Nombre + ".";
 	}
 
 	private Mesa[] mesas;

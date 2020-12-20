@@ -12,8 +12,7 @@ public class RestauranteDAO {
         int id = -1;
         String ciudad = "";
         String direccion = "";
-        //PROBAR
- 
+
         try {
         	while(result.next()) {
 				id = result.getInt("ID_Restaurante");

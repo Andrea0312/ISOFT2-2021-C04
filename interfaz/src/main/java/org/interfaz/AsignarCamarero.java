@@ -21,8 +21,6 @@ import org.persistencia_M1.RestauranteDAO;
 import org.persistencia_M1.CamareroBarraDAO;
 import org.persistencia_M1.CamareroMesaDAO;
 
-
-
 public class AsignarCamarero {
 
 	private JFrame frame;
@@ -32,6 +30,7 @@ public class AsignarCamarero {
 	private ArrayList<CamareroMesa> camarerosMesa = new ArrayList<CamareroMesa>();
 	private ArrayList<CamareroBarra> camarerosBarra = new ArrayList<CamareroBarra>();
 	private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
+	private JLabel labelEstado = new JLabel();
 
 	/**
 	 * Launch the application.
@@ -118,13 +117,13 @@ public class AsignarCamarero {
 				int idC = Integer.parseInt(idCamarero);
 				try {
 					Mesa mesa = MesaDAO.SelectMesaPorID(idM);
-					CamareroMesa camareroMesa =  CamareroMesaDAO.SelectCamareroMesaPorID(idC);
+					CamareroMesa camareroMesa = CamareroMesaDAO.SelectCamareroMesaPorID(idC);
 					mesa.setCamareroMesa(camareroMesa);
 				} catch (SQLException e1) {
-					e1.printStackTrace();
+					labelEstado.setText("No se ha podido asignar el camarero a la mesa correctamente.");
 				}
 				MesaDAO.UpdateMesaCamarero(mesas);
-				labelEstado.setText("Asignado correctamente"); // if existian ambos IDs, si no habrá q mostrar error
+				labelEstado.setText("Asignado correctamente.");
 			}
 		});
 		btnAsignar.setBounds(327, 209, 97, 25);
@@ -136,28 +135,31 @@ public class AsignarCamarero {
 		try {
 			RestauranteDAO.SelectTodosRestaurantes(restaurantes);
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			labelEstado.setText("No se han podido obtener los restaurantes de la base de datos correctamente.");
 		}
 	}
+
 	public void GenerarMesas() {
 		try {
 			MesaDAO.SelectTodasMesas(mesas);
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			labelEstado.setText("No se han podido obtener las mesas de la base de datos correctamente.");
 		}
 	}
+
 	public void GenerarCamarerosBarra() {
 		try {
 			CamareroBarraDAO.SelectTodosCamarerosBarra(camarerosBarra);
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			labelEstado.setText("No se han podido obtener los camareros barra de la base de datos correctamente.");
 		}
 	}
+
 	public void GenerarCamarerosMesa() {
 		try {
 			CamareroMesaDAO.SelectTodosCamarerosMesa(camarerosMesa);
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			labelEstado.setText("No se han podido obtener los camareros mesa de la base de datos correctamente.");
 		}
 	}
 }

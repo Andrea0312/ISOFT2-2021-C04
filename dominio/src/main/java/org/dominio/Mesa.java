@@ -1,7 +1,7 @@
 package org.dominio;
 
 public class Mesa {
- 
+
 	private int ID;
 	private Restaurante Restaurante;
 	private CamareroMesa CamareroMesa;
@@ -32,11 +32,11 @@ public class Mesa {
 	public void setRestaurante(Restaurante restaurante) {
 		Restaurante = restaurante;
 	}
-	
+
 	public CamareroMesa getCamareroMesa() {
 		return CamareroMesa;
 	}
-	
+
 	public void setCamareroMesa(CamareroMesa camareroMesa) {
 		CamareroMesa = camareroMesa;
 	}
@@ -52,18 +52,19 @@ public class Mesa {
 	public int getEstadoMesa() {
 		return estadoMesa;
 	}
-	
+
 	public void setEstadoMesa(int newEstadoMesa) {
 		estadoMesa = newEstadoMesa;
 	}
 
 	public void cambiarEstadoMesa() {
-		if(estadoMesa == 9) {
+		if (estadoMesa == 9) {
 			estadoMesa = 1;
-		}else {
+		} else {
 			estadoMesa++;
 		}
-	}	
+	}
+
 	public String toString() {
 		return "ID_Mesa: " + ID + ", Estado: " + estadoMesa + "\n";
 	}

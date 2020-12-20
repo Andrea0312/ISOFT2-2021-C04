@@ -1,7 +1,5 @@
 package org.interfaz;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -14,19 +12,12 @@ public class POVJefeSala {
 	/**
 	 * Launch the application.
 	 */
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					POVJefeSala window = new POVJefeSala();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-*/
+/*
+ * public static void main(String[] args) { EventQueue.invokeLater(new
+ * Runnable() { public void run() { try { POVJefeSala window = new
+ * POVJefeSala(); window.frame.setVisible(true); } catch (Exception e) {
+ * e.printStackTrace(); } } }); }
+ */
 	/**
 	 * Create the application.
 	 */
@@ -47,7 +38,7 @@ public class POVJefeSala {
 		JButton btnAsignarCamarero = new JButton("Asignar camarero a mesa");
 		btnAsignarCamarero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AsignarCamarero asignarCam = new AsignarCamarero();
+				new AsignarCamarero();
 			}
 		});
 		btnAsignarCamarero.setBounds(23, 92, 186, 57);

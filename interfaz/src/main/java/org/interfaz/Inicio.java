@@ -25,7 +25,7 @@ public class Inicio {
 					Inicio window = new Inicio();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.err.println("Error al cargar la clase principal.");
 				}
 			}
 		});
@@ -53,14 +53,14 @@ public class Inicio {
 		frame.getContentPane().add(btnJefeDeSala);
 		btnJefeDeSala.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				POVJefeSala JefSala = new POVJefeSala();
+				new POVJefeSala();
 			}
 		});
 		
 		JButton btnCocina = new JButton("Cocina");
 		btnCocina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				POVCocina Cocina = new POVCocina();
+				new POVCocina();
 			} 
 		});
 		btnCocina.setBounds(55, 207, 138, 61);
@@ -69,7 +69,7 @@ public class Inicio {
 		JButton btnCamarero = new JButton("Camarero");
 		btnCamarero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				POVCamarero cam = new POVCamarero(camareroAvisado);
+				new POVCamarero(camareroAvisado);
 			}
 		});
 		btnCamarero.setBounds(323, 97, 138, 65);

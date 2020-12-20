@@ -7,17 +7,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import org.dominio.CamareroBarra;
 import org.dominio.CamareroMesa;
-import org.dominio.JefeSala;
 import org.dominio.Mesa;
-import org.dominio.Restaurante;
 import org.persistencia_M1.CamareroBarraDAO;
 import org.persistencia_M1.CamareroMesaDAO;
-import org.persistencia_M1.JefeSalaDAO;
 import org.persistencia_M1.MesaDAO;
-import org.persistencia_M1.RestauranteDAO;
 
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -32,11 +26,8 @@ public class CambiarEstadoMesa {
 	private JFrame frame;
 	private JLabel labelEstado;
 	private JTextField textFieldIDMesa;
-	private JTextField MesaIDtextField;
-	private ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
 	private ArrayList<CamareroMesa> camarerosMesa = new ArrayList<CamareroMesa>();
 	private ArrayList<CamareroBarra> camarerosBarra = new ArrayList<CamareroBarra>();
-	private ArrayList<JefeSala> jefesSala = new ArrayList<JefeSala>();
 	private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
 
 	/**
@@ -52,7 +43,6 @@ public class CambiarEstadoMesa {
 	 * Create the application.
 	 */
 	public CambiarEstadoMesa() {
-		GenerarRestaurantes();
 		GenerarMesas();
 		GenerarCamarerosMesa();
 		initialize();
@@ -89,12 +79,12 @@ public class CambiarEstadoMesa {
 				String idMesa = textFieldIDMesa.getText();
 				try {
 					int idM = Integer.parseInt(idMesa);
-					if(idM>0) {
+					if (idM > 0) {
 						cambiar(idM);
-					}else {
+					} else {
 						labelEstado.setText("Introduzca un valor positivo");
 					}
-				} catch(final NumberFormatException e1) {
+				} catch (final NumberFormatException e1) {
 					labelEstado.setText("Introduzca un valor numerico");
 				}
 			}
@@ -143,19 +133,11 @@ public class CambiarEstadoMesa {
 
 	}
 
-	public void GenerarRestaurantes() {
-		try {
-			RestauranteDAO.SelectTodosRestaurantes(restaurantes);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	}
-
 	public void GenerarMesas() {
 		try {
 			MesaDAO.SelectTodasMesas(mesas);
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			labelEstado.setText("No se han podido obtener las mesas de la base de datos correctamente.");
 		}
 	}
 
@@ -163,7 +145,7 @@ public class CambiarEstadoMesa {
 		try {
 			CamareroBarraDAO.SelectTodosCamarerosBarra(camarerosBarra);
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			labelEstado.setText("No se han podido obtener los camareros barra de la base de datos correctamente.");
 		}
 	}
 
@@ -171,18 +153,10 @@ public class CambiarEstadoMesa {
 		try {
 			CamareroMesaDAO.SelectTodosCamarerosMesa(camarerosMesa);
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			labelEstado.setText("No se han podido obtener los camareros mesa de la base de datos correctamente.");
 		}
 	}
 
-	public void GenerarJefesSala() {
-		try {
-			JefeSalaDAO.SelectTodosJefesSala(jefesSala);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	}
-	
 	public void cambiar(int idM) {
 		try {
 			System.out.println(idM);
@@ -193,6 +167,6 @@ public class CambiarEstadoMesa {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			labelEstado.setText("Ocurrió un error al actualizar el estado");
-		}	
+		}
 	}
 }
