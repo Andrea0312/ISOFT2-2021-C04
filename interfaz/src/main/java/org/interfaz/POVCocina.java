@@ -3,30 +3,21 @@ package org.interfaz;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
+import org.dominio.Ingrediente;
+import org.dominio.Restaurante;
+import org.persistencia_M4.IngredienteADAO;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class POVCocina {
 
 	private JFrame frame;
+	private ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
 
-	/**
-	 * Launch the application.
-	 */
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					POVCocina window = new POVCocina();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-*/
 	/**
 	 * Create the application.
 	 */
@@ -55,6 +46,19 @@ public class POVCocina {
 		frame.getContentPane().add(btnAvisarCamarero);
 		
 		JButton btnActualizarAlmacen = new JButton("Actualizar Almacen");
+		btnActualizarAlmacen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int umbralCantidad = 5;
+				ingredientes = IngredienteADAO.obtenerIngredientes(1, 3);
+				for(int i=0; i<ingredientes.size(); i++ ) {
+					if (ingredientes.get(i).getCantidad()<=umbralCantidad)
+						IngredienteADAO.aprovisionarIngredientes(1, ingredientes.get(i).getIdIngrediente());
+				}
+			}
+		});
+		
+		
+		
 		btnActualizarAlmacen.setBounds(12, 162, 153, 44);
 		frame.getContentPane().add(btnActualizarAlmacen);
 	}
