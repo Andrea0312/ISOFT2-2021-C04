@@ -76,6 +76,36 @@ public class MesaDAO {
 		}
 		return mAux;
 	}
+	
+	public static void SelectMesasDisponibles(ArrayList<Mesa> mesas) throws SQLException {
+		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.mesa where ID_EstadoMesa=1");
+		int id = -1;
+		int idRestaurante = -1;
+		Restaurante restaurante = null;
+		int idCamareroMesa = -1;
+		CamareroMesa CamareroMesa = null;
+		int tamano = -1;
+		int estado = -1;
+		Mesa mAux = null;
+
+		try {
+			while (result.next()) {
+				id = result.getInt("ID_Mesa");
+				idRestaurante = result.getInt("ID_Restaurante");
+				idCamareroMesa = result.getInt("ID_Empleado");
+				tamano = result.getInt("Tamaño");
+				estado = result.getInt("ID_EstadoMesa");
+				restaurante = RestauranteDAO.SelectRestaurantePorID(idRestaurante);
+				CamareroMesa = CamareroMesaDAO.SelectCamareroMesaPorID(idCamareroMesa);
+				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
+				mesas.add(mAux);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public static Mesa SelectMesaPorID(int ID) throws SQLException {
 		ResultSet result = Agente.Select("SELECT * FROM C04dbservice.mesa where ID_Mesa = " + ID);
@@ -151,5 +181,4 @@ public class MesaDAO {
 			return -1;
 		}
 	}
-
 }

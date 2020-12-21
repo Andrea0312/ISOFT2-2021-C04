@@ -68,4 +68,13 @@ public class Mesa {
 	public String toString() {
 		return "ID_Mesa: " + ID + ", Estado: " + estadoMesa + "\n";
 	}
+
+	public boolean reservarMesa() {
+		if (estadoMesa == 1) {
+			estadoMesa = 2;
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

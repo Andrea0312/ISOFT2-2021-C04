@@ -9,4 +9,8 @@ public class JefeSala extends Empleado {
 	public void AsignarCamareroMesa(Mesa m, CamareroMesa c) {
 		m.setCamareroMesa(c);
 	}
+	
+	public boolean ReservarMesa(Mesa m) {
+		return m.reservarMesa();
+	}
 }

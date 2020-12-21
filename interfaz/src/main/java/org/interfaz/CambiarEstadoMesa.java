@@ -25,6 +25,7 @@ public class CambiarEstadoMesa {
 
 	private JFrame frame;
 	private JLabel labelEstado;
+	JTextArea textArea = new JTextArea();
 	private JTextField textFieldIDMesa;
 	private ArrayList<CamareroMesa> camarerosMesa = new ArrayList<CamareroMesa>();
 	private ArrayList<CamareroBarra> camarerosBarra = new ArrayList<CamareroBarra>();
@@ -64,7 +65,6 @@ public class CambiarEstadoMesa {
 		labelEstado = new JLabel("");
 		JButton btnAceptar = new JButton("Aceptar");
 
-		JTextArea textArea = new JTextArea();
 		textArea.setText(MesaDAO.CadenaMesas(mesas));
 		textArea.setEditable(false);
 
@@ -159,11 +159,16 @@ public class CambiarEstadoMesa {
 
 	public void cambiar(int idM) {
 		try {
-			System.out.println(idM);
 			Mesa mesa = MesaDAO.SelectMesaPorID(idM);
 			mesa.cambiarEstadoMesa();
 			MesaDAO.UpdateMesaEstado(mesa);
+			textArea.setText("");
+			mesas.clear();
+			GenerarMesas();
+			textArea.setText(MesaDAO.CadenaMesas(mesas));
 			labelEstado.setText("Estado actualizado correctamente");
+		} catch (NullPointerException e) {
+			labelEstado.setText("No existe la mesa en la base de datos.");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 			labelEstado.setText("Ocurrió un error al actualizar el estado");

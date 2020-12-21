@@ -43,6 +43,16 @@ public class POVJefeSala {
 		});
 		btnAsignarCamarero.setBounds(23, 92, 186, 57);
 		frame.getContentPane().add(btnAsignarCamarero);
+		
+		JButton btnReservarMesa = new JButton("Reservar mesas");
+		btnReservarMesa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReservarMesa reservarMesa = new ReservarMesa();
+				reservarMesa.setVisible(true);
+			}
+		});
+		btnReservarMesa.setBounds(23, 200, 186, 57);
+		frame.getContentPane().add(btnReservarMesa);
 	}
 
 }

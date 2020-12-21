@@ -43,7 +43,7 @@ public class EmpleadoDAO {
 					JefesSala.add(jsAux);
 					break;
 				default:
-					Empleado eAux = new Empleado(id, restaurante, nombre, apellido, telefono); //METER UN ARRAYLIST PARA CONTROLAR COCINEROS O MÁS COSAS
+					new Empleado(id, restaurante, nombre, apellido, telefono); //METER UN ARRAYLIST PARA CONTROLAR COCINEROS O MÁS COSAS
 					break;
 				}
 			}
