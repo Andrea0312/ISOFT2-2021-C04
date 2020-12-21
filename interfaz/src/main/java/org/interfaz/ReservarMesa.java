@@ -31,60 +31,51 @@ public class ReservarMesa extends JFrame {
 	 * Launch the application.
 	 */
 	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ReservarMesa frame = new ReservarMesa();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { ReservarMesa frame = new
+	 * ReservarMesa(); frame.setVisible(true); } catch (Exception e) {
+	 * e.printStackTrace(); } } }); }
+	 */
 
 	/**
 	 * Create the frame.
 	 */
 	public ReservarMesa() {
 		GenerarMesas();
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 782, 447);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblMesas = new JLabel("Mesas Disponibles:");
 		lblMesas.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblMesas.setBounds(10, 10, 250, 50);
 		contentPane.add(lblMesas);
-		
+
 		textMesasID = new JTextField();
 		textMesasID.setBounds(400, 70, 358, 30);
 		contentPane.add(textMesasID);
 		textMesasID.setColumns(10);
-		
+
 		lblMesasID.setText("Introduzca el id de la mesa a reservar");
 		lblMesasID.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblMesasID.setBounds(400, 10, 358, 50);
 		contentPane.add(lblMesasID);
-		
+
 		textMesas.setBounds(10, 70, 351, 281);
 		contentPane.add(textMesas);
-		
+
 		lblEstado.setBounds(10, 350, 351, 40);
 		contentPane.add(lblEstado);
-		
+
 		JButton btnReservarMesa = new JButton("Reservar Mesa");
 		btnReservarMesa.setBounds(380, 310, 358, 70);
 		contentPane.add(btnReservarMesa);
 		new JLabel("ID Mesa:");
 		textMesas.setText(MesaDAO.CadenaMesas(mesas));
-
+		textMesas.setEditable(false);
 		btnReservarMesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String idMesa = textMesasID.getText();
@@ -101,7 +92,7 @@ public class ReservarMesa extends JFrame {
 			}
 		});
 	}
-	
+
 	public void GenerarMesas() {
 		try {
 			MesaDAO.SelectMesasDisponibles(mesas);
@@ -109,7 +100,7 @@ public class ReservarMesa extends JFrame {
 			lblEstado.setText("No se han podido obtener las mesas de la base de datos correctamente.");
 		}
 	}
-	
+
 	public void reservar(int idM) {
 		try {
 			Mesa mesa = MesaDAO.SelectMesaPorID(idM);

@@ -127,7 +127,6 @@ public class MesaDAO {
 				tamano = result.getInt("Tamaño");
 				estado = result.getInt("ID_EstadoMesa");
 				mAux = new Mesa(id, restaurante, CamareroMesa, tamano, estado);
-				System.out.println(mAux);
 			}
 
 		} catch (SQLException e) {
