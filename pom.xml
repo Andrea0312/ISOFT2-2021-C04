@@ -83,5 +83,6 @@
 		<module>persistencia_M1</module>
     <module>persistencia_M2</module>
     <module>persistencia_M4</module>
+    <module>persistencia_M5</module>
   </modules>
 </project>
