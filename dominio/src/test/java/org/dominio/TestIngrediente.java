@@ -42,14 +42,13 @@ public class TestIngrediente {
 
 	@Test
 	public final void testGetIdRestaurante() {
-		assertEquals(2, i.getIdRestaurante());
+		assertEquals(1, i.getIdRestaurante());
 	}
 
 	@Test
 	public final void testSetIdRestaurante() {
-
-		assertEquals(1, i.getIdRestaurante());
 		i.setIdRestaurante(2);
+		assertEquals(2, i.getIdRestaurante());
 	}
 
 	@Test

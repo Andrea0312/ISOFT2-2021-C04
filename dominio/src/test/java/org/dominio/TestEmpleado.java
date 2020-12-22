@@ -41,13 +41,13 @@ public class TestEmpleado {
 
 	@Test
 	public final void testGetNombre() {
-		assertEquals("Luis", e.getNombre());
+		assertEquals("Miguel", e.getNombre());
 	}
 
 	@Test
 	public final void testSetNombre() {
+		assertEquals("Luis", e.getNombre());
 		e.setNombre("Miguel");
-		assertEquals("Miguel", e.getNombre());
 	}
 
 	@Test

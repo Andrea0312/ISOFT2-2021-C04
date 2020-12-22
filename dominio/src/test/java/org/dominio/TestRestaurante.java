@@ -37,24 +37,24 @@ public class TestRestaurante {
 
 	@Test
 	public final void testGetNombre() {
-		assertEquals("Mafia", r.getNombre());
-	}
-
-	@Test
-	public final void testSetNombre() {
-		r.setNombre("Ginos");
 		assertEquals("Ginos", r.getNombre());
 	}
 
 	@Test
+	public final void testSetNombre() {
+		assertEquals("Mafia", r.getNombre());
+		r.setNombre("Ginos");
+	}
+
+	@Test
 	public final void testGetCiudad() {
-		assertEquals("Ciudad Real", r.getCiudad());
+		assertEquals("Toledo", r.getCiudad());
 	}
 
 	@Test
 	public final void testSetCiudad() {
+		assertEquals("Ciudad Real", r.getCiudad());
 		r.setCiudad("Toledo");
-		assertEquals("Toledo", r.getCiudad());
 	}
 
 	@Test

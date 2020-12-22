@@ -13,7 +13,7 @@ import org.junit.Test;
 public class TestPlato {
 
 	static Plato p;
-	static ArrayList<Ingrediente> ingredientes;
+	static ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
 	static Ingrediente i1;
 	static Ingrediente i2;
 	
