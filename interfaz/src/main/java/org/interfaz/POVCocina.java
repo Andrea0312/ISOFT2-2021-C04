@@ -48,11 +48,9 @@ public class POVCocina {
 		JButton btnActualizarAlmacen = new JButton("Actualizar Almacen");
 		btnActualizarAlmacen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int umbralCantidad = 5;
 				ingredientes = IngredienteADAO.obtenerIngredientes(1, 3);
 				for(int i=0; i<ingredientes.size(); i++ ) {
-					if (ingredientes.get(i).getCantidad()<=umbralCantidad)
-						IngredienteADAO.aprovisionarIngredientes(1, ingredientes.get(i).getIdIngrediente());
+					IngredienteADAO.eactualizarIngredietentes(1, ingredientes.get(i).getIdIngrediente());
 				}
 			}
 		});
@@ -61,5 +59,19 @@ public class POVCocina {
 		
 		btnActualizarAlmacen.setBounds(12, 162, 153, 44);
 		frame.getContentPane().add(btnActualizarAlmacen);
+		
+		JButton btnReabastecerAlmacen = new JButton("Reabastecer el almacen");
+		btnReabastecerAlmacen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int umbralCantidad = 5;
+				ingredientes = IngredienteADAO.obtenerIngredientes(1, 3);
+				for(int i=0; i<ingredientes.size(); i++ ) {
+					if (ingredientes.get(i).getCantidad()<=umbralCantidad)
+						IngredienteADAO.aprovisionarIngredientes(1, ingredientes.get(i).getIdIngrediente());
+				}
+			}
+		});
+		btnReabastecerAlmacen.setBounds(221, 162, 153, 44);
+		frame.getContentPane().add(btnReabastecerAlmacen);
 	}
 }

@@ -59,5 +59,24 @@ public class IngredienteADAO {
 			e.printStackTrace();
 		}	
 	}
+	
+	public static void eactualizarIngredietentes(int idRestaurante, int idIngrediente) {
+		// TODO - implement BebidaDAO.eliminarUnaBebida
+		
+		Statement st = Agente.Conectar();
+		/*
+		 * 
+		 * 		FUNCIONA !!
+		 * 
+		 * */
+		try {
+			st.executeUpdate("UPDATE bebida_almacen "
+						   + "SET  cantidad = cantidad-1 "
+						   + "WHERE ID_Restaurante="+idRestaurante
+						   + " AND ID_Bebida="+idIngrediente+";");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+	}
 }
-
