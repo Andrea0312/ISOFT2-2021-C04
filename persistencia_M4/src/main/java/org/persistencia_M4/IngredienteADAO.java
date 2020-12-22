@@ -70,10 +70,10 @@ public class IngredienteADAO {
 		 * 
 		 * */
 		try {
-			st.executeUpdate("UPDATE bebida_almacen "
+			st.executeUpdate("UPDATE ingrediente_almacen "
 						   + "SET  cantidad = cantidad-1 "
 						   + "WHERE ID_Restaurante="+idRestaurante
-						   + " AND ID_Bebida="+idIngrediente+";");
+						   + " AND ID_Ingrediente="+idIngrediente+";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
