@@ -22,6 +22,16 @@
   </properties>
 
   <dependencies>
+  	<dependency>
+		<groupId>isoft_c04</groupId>
+		<artifactId>persistencia_M1</artifactId>
+		<version>0.1.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>isoft_c04</groupId>
+		<artifactId>dominio</artifactId>
+		<version>0.1.1-SNAPSHOT</version>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

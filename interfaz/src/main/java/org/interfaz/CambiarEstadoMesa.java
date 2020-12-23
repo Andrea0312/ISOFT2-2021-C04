@@ -15,6 +15,7 @@ import org.persistencia_M1.CamareroMesaDAO;
 import org.persistencia_M1.JefeSalaDAO;
 import org.persistencia_M1.MesaDAO;
 import org.persistencia_M1.RestauranteDAO;
+import org.persistencia_M5.EstadisticasDAO;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -32,6 +33,7 @@ public class CambiarEstadoMesa {
 	private JFrame frame;
 	private JTextField textFieldIDMesa;
 	private JTextField MesaIDtextField;
+	private Restaurante restauranteElegido;
 	private ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
 	private ArrayList<CamareroMesa> camarerosMesa = new ArrayList<CamareroMesa>();
 	private ArrayList<CamareroBarra> camarerosBarra = new ArrayList<CamareroBarra>();
@@ -99,46 +101,79 @@ public class CambiarEstadoMesa {
 				labelEstado.setText("Estado actualizado correctamente");
 			}
 		});
+		
+		JButton btnEnviarEstadisticas = new JButton("Enviar estadisticas");
+		btnEnviarEstadisticas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					restauranteElegido = EstadisticasDAO.SelectRestaurantePorID(2);
+					double tiempoNota = restauranteElegido.getTiempoEntregaNota();
+					double tiempoLibre = restauranteElegido.getTiempoMesaLire();
+					double tiempoPreparacion = restauranteElegido.getTiempoPrepComida();
+					double tiempoComandas = restauranteElegido.getTiempoTomaComandas();
+					
+					EstadisticasDAO.enviarEstadistica(2, tiempoNota, tiempoLibre, tiempoPreparacion, tiempoComandas);
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap(319, Short.MAX_VALUE)
-						.addComponent(btnAceptar).addGap(75))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addGroup(groupLayout
-						.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addGap(29).addGroup(groupLayout
-								.createParallelGroup(Alignment.LEADING).addComponent(lblSeleccioneElEstado).addGroup(
-										Alignment.LEADING,
-										groupLayout.createSequentialGroup().addGap(18).addGroup(groupLayout
-												.createParallelGroup(Alignment.TRAILING)
-												.addGroup(groupLayout.createSequentialGroup().addComponent(labelEstado)
-														.addGap(99))
-												.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-														.addGap(10)
-														.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																.addComponent(lblListadoDeMesas,
-																		GroupLayout.PREFERRED_SIZE, 122,
-																		GroupLayout.PREFERRED_SIZE)
-																.addComponent(textArea))))))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(textFieldIDMesa, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblIdMesa, GroupLayout.PREFERRED_SIZE, 122,
-												GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(208, Short.MAX_VALUE)))));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(25)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblSeleccioneElEstado).addComponent(lblIdMesa))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(textFieldIDMesa,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(18).addComponent(lblListadoDeMesas).addGap(13)
-						.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE).addComponent(labelEstado)
-						.addGap(49))
-				.addGroup(groupLayout.createSequentialGroup().addGap(79).addComponent(btnAceptar).addContainerGap(164,
-						Short.MAX_VALUE)));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGap(29)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblSeleccioneElEstado)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(labelEstado)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(10)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(textArea)
+										.addComponent(lblListadoDeMesas, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))))))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(textFieldIDMesa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblIdMesa, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap(236, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(btnEnviarEstadisticas)
+								.addContainerGap())
+							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+								.addComponent(btnAceptar)
+								.addGap(75)))))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(25)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSeleccioneElEstado)
+						.addComponent(lblIdMesa))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(textFieldIDMesa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblListadoDeMesas)
+					.addGap(13)
+					.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+					.addComponent(labelEstado)
+					.addGap(49))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(79)
+					.addComponent(btnAceptar)
+					.addGap(18)
+					.addComponent(btnEnviarEstadisticas)
+					.addContainerGap(228, Short.MAX_VALUE))
+		);
 		frame.getContentPane().setLayout(groupLayout);
 
 	}

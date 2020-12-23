@@ -7,7 +7,7 @@ public class Restaurante {
 	private double tiempoTomaComandas;
 	private double tiempoPrepComida;
 	private double tiempoEntregaNota;
-	private double tiempoMesaLire;
+	private double tiempoMesaLibre;
 	private Empleado[] empleados;
 
 	public Restaurante(int iD, String nombre, String ciudad, Empleado[] empleados, Mesa[] mesas) {
@@ -73,11 +73,11 @@ public class Restaurante {
 	}
 
 	public double getTiempoMesaLire() {
-		return tiempoMesaLire;
+		return tiempoMesaLibre;
 	}
 
 	public void setTiempoMesaLire(double tiempoMesaLire) {
-		this.tiempoMesaLire = tiempoMesaLire;
+		this.tiempoMesaLibre = tiempoMesaLire;
 	}
 
 	public Empleado[] getEmpleados() {
