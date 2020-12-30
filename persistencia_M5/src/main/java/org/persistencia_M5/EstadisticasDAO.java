@@ -32,8 +32,6 @@ public class EstadisticasDAO {
 	
 	public static void enviarEstadistica(int idRestaurante, double tiempoNota, double tiempoLibre, double tiempoPreparacion, double tiempoComandas) {
 
-		//Según la previsión hemos un mínimo de 30 unidades por ingrediente diario
-
 		Statement st = Agente.Conectar();
 
 		try {
